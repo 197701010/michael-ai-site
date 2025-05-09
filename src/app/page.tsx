@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Calendar, MessageSquare, Users } from "lucide-react";
 import BookingForm from "@/components/booking-form-new";
 
-function CheckCircle(props) {
+function CheckCircle(props: any) 
+  {
   return (
     <svg
       {...props}
@@ -22,7 +23,7 @@ function CheckCircle(props) {
   );
 }
 
-function Clock(props) {
+function CheckCircle(props: any) {
   return (
     <svg
       {...props}
