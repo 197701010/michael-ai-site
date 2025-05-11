@@ -1,8 +1,11 @@
 import Link from "next/link";
-import Image from 'next/image'; // Import is al correct aanwezig
+import Image from 'next/image';
+import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, MessageSquare, Users, Clock, CheckCircle } from "lucide-react";
 import BookingForm from "@/components/booking-form-new";
 
+// Data arrays (lezingenData, workshopsData, transformatieData) blijven hetzelfde...
+// ... (data arrays hier weggelaten voor beknoptheid, zorg dat ze in je code staan)
 // Data voor Lezingen
 const lezingenData = [
   {
@@ -116,69 +119,60 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex flex-wrap items-center justify-between h-16 px-4 sm:px-4 md:px-6">
+        {/* Header blijft hetzelfde */}
+        <div className="container flex h-16 items-center px-4 sm:px-4 md:px-6">
           <Link href="/" className="font-bold text-xl text-blue-800">
             Michael Salmagne
           </Link>
-          <nav className="flex w-full flex-wrap justify-center gap-4 pt-2 sm:pt-0 sm:w-auto sm:ml-auto sm:flex-row sm:gap-6 text-sm">
-            <Link href="#about" className="hover:underline underline-offset-4 text-blue-800">
+          <nav className="ml-auto flex flex-wrap justify-center gap-4 pt-2 text-sm sm:pt-0 sm:w-auto sm:flex-row sm:gap-6">
+            <Link href="#about" className="font-medium hover:underline underline-offset-4 text-blue-800">
               Over mij
             </Link>
-            <Link href="#topics" className="hover:underline underline-offset-4 text-blue-800">
+            <Link href="#topics" className="font-medium hover:underline underline-offset-4 text-blue-800">
               Lezingen
             </Link>
-            <Link href="#workshops" className="hover:underline underline-offset-4 text-blue-800">
+            <Link href="#workshops" className="font-medium hover:underline underline-offset-4 text-blue-800">
               Workshops
             </Link>
-            <Link href="#trajecten" className="hover:underline underline-offset-4 text-blue-800">
+            <Link href="#trajecten" className="font-medium hover:underline underline-offset-4 text-blue-800">
               Transformatie
             </Link>
             <Link
-              href="#booking"
-              className="bg-blue-800 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-blue-900 transition sm:ml-4"
+                href="#booking"
+                className="bg-blue-800 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-blue-900 transition sm:ml-4"
             >
-              Contact
+                Contact
             </Link>
           </nav>
         </div>
       </header>
 
-      <main className="flex-1 px-4 sm:px-2 md:px-6">
+      <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-16 md:py-28 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container grid items-center gap-12 px-4 md:px-6 lg:grid-cols-2">
-            <div className="space-y-4 text-center lg:text-left">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-                AI-expert met een menselijke kijk op de toekomst
-              </h1>
-              <p className="max-w-[600px] mx-auto lg:mx-0 text-gray-500 text-base sm:text-lg">
-                Als bruggebouwer tussen business, mens en technologie bied ik een uniek perspectief op de toekomst van AI.
-              </p>
-              <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
-                <Link
-                  href="#booking"
-                  className="bg-blue-800 text-white px-6 py-3 rounded text-lg font-semibold inline-flex items-center hover:bg-blue-900 transition"
-                >
-                  Boek een lezing <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-                <Link
-                  href="#topics"
-                  className="border border-blue-800 text-blue-800 px-6 py-3 rounded text-lg font-semibold hover:bg-blue-50 transition"
-                >
-                  Bekijk mijn onderwerpen
-                </Link>
+        <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
+          {/* De container zorgt al voor padding en een responsive max-width. */}
+          {/* Het content blok hierbinnen heeft al max-w-3xl mx-auto, wat goed is voor centrering. */}
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+              <div className="space-y-6">
+                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                  AI-expert met een menselijke kijk op de toekomst
+                </h1>
+                <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Als bruggebouwer tussen business, instituties, mens en technologie bied ik een uniek perspectief op de
+                  toekomst van AI.
+                </p>
+                <div className="flex flex-col gap-3 min-[400px]:flex-row justify-center sm:gap-4">
+                  <Button asChild size="lg" className="bg-blue-800 hover:bg-blue-900 text-white">
+                    <Link href="#booking">
+                      Boek een lezing <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="border-blue-800 text-blue-800 hover:bg-blue-50 hover:text-blue-900">
+                    <Link href="#topics">Bekijk mijn onderwerpen</Link>
+                  </Button>
+                </div>
               </div>
-            </div>
-            {/* Afbeelding in Hero Section bijgewerkt */}
-            <div className="relative mx-auto lg:mr-0 aspect-video w-full overflow-hidden rounded-xl">
-              <Image
-                alt="Michael Salmagne tijdens een presentatie"
-                src="/images/michael-speaking.jpg"
-                fill // Gebruik de boolean 'fill' prop
-                sizes="(max-width: 1024px) 100vw, 50vw" // Pas deze 'sizes' aan je layout aan!
-                className="object-cover" // Tailwind class voor object-fit
-                priority // Voor LCP optimalisatie
-              />
             </div>
           </div>
         </section>
@@ -186,18 +180,18 @@ export default function Home() {
         {/* About Section */}
         <section id="about" className="py-16 md:py-24">
           <div className="container px-4 md:px-6">
-            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-              {/* Afbeelding in About Section bijgewerkt. Belangrijk: zorg dat de parent div (deze hieronder) daadwerkelijk afmetingen krijgt. We hadden hier 'w-full' aan toegevoegd. */}
-              <div className="relative mx-auto w-full aspect-square max-w-sm overflow-hidden rounded-full">
+            {/* Veranderd van max-w-5xl naar max-w-4xl voor een iets compacter gevoel */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center max-w-4xl mx-auto">
+              <div className="relative mx-auto w-full aspect-square max-w-sm overflow-hidden rounded-full lg:ml-0">
                 <Image
                   alt="Michael Salmagne portret"
                   src="/images/michael-portrait.jpg"
-                  fill // Gebruik de boolean 'fill' prop
-                  sizes="(max-width: 640px) 100vw, 24rem" // Afgestemd op max-w-sm (24rem)
-                  className="object-cover object-top" // Tailwind classes voor object-fit en object-position
+                  fill
+                  sizes="(max-width: 640px) 100vw, 24rem"
+                  className="object-cover object-top"
                 />
               </div>
-              <div className="text-center lg:text-left space-y-4">
+              <div className="space-y-4 text-center lg:text-left">
                 <h2 className="text-3xl font-bold tracking-tight">Over Michael Salmagne</h2>
                 <p className="text-base md:text-lg text-gray-500">
                   Als spreker over AI focus ik niet op de technische details, maar op de menselijke kant en de praktische toepassingen.
@@ -227,15 +221,17 @@ export default function Home() {
         {/* Topics Section (Lezingen) */}
         <section id="topics" className="py-16 md:py-24 bg-slate-50">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            {/* max-w-2xl behouden, was al redelijk smal */}
+            <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-2xl mx-auto mb-12">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-blue-800">Mijn Lezingen</h2>
-                <p className="max-w-[900px] mx-auto text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="mx-auto text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Ontdek de verschillende lezingen die ik aanbied over AI en de toekomst van technologie.
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-12">
+            {/* De grid van kaarten, max-w-5xl is vaak goed voor 3 kolommen. Je kunt dit verkleinen naar max-w-4xl als je de kaarten ook compacter wilt. */}
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {lezingenData.map((topic, index) => (
                 <div key={index} className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden">
                   {topic.imageSrc && (
@@ -245,16 +241,16 @@ export default function Home() {
                         alt={`Afbeelding voor ${topic.title}`}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" // Voorbeeld, pas aan!
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
                   )}
                   <div className="p-6 flex flex-col flex-grow">
                     <div>
                       <h3 className="text-xl font-bold text-blue-800 text-center sm:text-left">{topic.title}</h3>
-                      <p className="mt-2 text-gray-500 text-center sm:text-left flex-grow">{topic.description}</p>
+                      <p className="mt-2 text-gray-500 text-center sm:text-left flex-grow min-h-[6rem]">{topic.description}</p>
                     </div>
-                    <div className="mt-4 flex items-center text-sm text-gray-500 justify-center sm:justify-start">
+                    <div className="mt-auto pt-4 flex items-center text-sm text-gray-500 justify-center sm:justify-start">
                       <Clock className="mr-1 h-4 w-4" />
                       {topic.duration}
                     </div>
@@ -268,14 +264,16 @@ export default function Home() {
         {/* Workshops Section */}
         <section id="workshops" className="py-16 md:py-24">
           <div className="container px-4 md:px-6">
-            <div className="text-center space-y-4">
+            {/* max-w-2xl behouden voor intro */}
+            <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
                 Inspiratie Workshops
               </h2>
-              <p className="max-w-3xl mx-auto text-gray-500 text-base md:text-xl">
+              <p className="mx-auto text-gray-500 text-base md:text-xl">
                 Naast lezingen verzorg ik ook interactieve workshops om teams te inspireren en AI toe te passen in de praktijk.
               </p>
             </div>
+            {/* Kaarten grid, max-w-5xl is vaak goed voor 2 kolommen. Kan naar max-w-4xl. */}
             <div className="mt-12 grid max-w-5xl mx-auto grid-cols-1 md:grid-cols-2 gap-8">
               {workshopsData.map((workshop, index) => (
                 <div key={index} className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden">
@@ -286,16 +284,16 @@ export default function Home() {
                         alt={`Afbeelding voor ${workshop.title}`}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw" // Voorbeeld, pas aan!
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
                   )}
                   <div className="p-6 flex flex-col flex-grow">
                     <div>
                       <h3 className="text-xl font-bold text-blue-800 text-center sm:text-left">{workshop.title}</h3>
-                      <p className="mt-2 text-gray-500 text-center sm:text-left flex-grow">{workshop.description}</p>
+                      <p className="mt-2 text-gray-500 text-center sm:text-left flex-grow min-h-[4rem]">{workshop.description}</p>
                     </div>
-                    <ul className="mt-4 text-sm text-gray-500 space-y-2">
+                    <ul className="mt-auto pt-4 text-sm text-gray-500 space-y-2">
                       {workshop.details.map((detail, i) => (
                         <li key={i} className="flex items-center justify-center sm:justify-start">
                           <CheckCircle className="mr-2 h-4 w-4 text-blue-800" /> {detail}
@@ -312,14 +310,16 @@ export default function Home() {
         {/* Transformatie Trajecten Section */}
         <section id="trajecten" className="py-16 md:py-24 bg-slate-50">
           <div className="container px-4 sm:px-4 md:px-6">
-            <div className="text-center space-y-4">
+            {/* max-w-2xl behouden voor intro */}
+            <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
                 Transformatie Trajecten
               </h2>
-              <p className="max-w-3xl mx-auto text-gray-500 text-base md:text-xl">
+              <p className="mx-auto text-gray-500 text-base md:text-xl">
                 Klaar om je organisatie klaar te stomen voor het AI-tijdperk? Kies uit twee krachtige vormen van samenwerking.
               </p>
             </div>
+            {/* Kaarten grid, max-w-5xl is vaak goed voor 2 kolommen. Kan naar max-w-4xl. */}
             <div className="mt-12 grid max-w-5xl mx-auto grid-cols-1 md:grid-cols-2 gap-8">
               {transformatieData.map((traject, index) => (
                 <div key={index} className="flex flex-col rounded-lg border bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
@@ -330,16 +330,16 @@ export default function Home() {
                         alt={`Afbeelding voor ${traject.title}`}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw" // Voorbeeld, pas aan!
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
                   )}
                   <div className="p-6 flex flex-col flex-grow">
                     <div>
                       <h3 className="text-xl font-bold text-blue-800">{traject.title}</h3>
-                      <p className="mt-2 text-gray-600 flex-grow">{traject.description}</p>
+                      <p className="mt-2 text-gray-600 flex-grow min-h-[5rem]">{traject.description}</p>
                     </div>
-                    <ul className="mt-4 text-sm text-gray-800 space-y-2">
+                    <ul className="mt-auto pt-4 text-sm text-gray-800 space-y-2">
                       {traject.features.map((feature, i) => (
                         <li key={i} className="flex items-center">
                           <CheckCircle className="mr-2 h-4 w-4 text-blue-800" />
@@ -357,7 +357,8 @@ export default function Home() {
         {/* Booking Section */}
         <section id="booking" className="py-16 md:py-24 bg-slate-50">
           <div className="container px-4 md:px-6">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            {/* Veranderd van max-w-5xl naar max-w-4xl voor een iets compacter gevoel */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 max-w-4xl mx-auto">
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold tracking-tight">Boek Michael als Spreker</h2>
                 <p className="text-gray-500 md:text-lg">
@@ -373,7 +374,7 @@ export default function Home() {
                       "Nazorg en aanvullende materialen indien gewenst"
                     ].map((item, i) => (
                       <li key={i} className="flex items-start">
-                        <CheckCircle className="mr-2 h-5 w-5 text-primary mt-0.5" />
+                        <CheckCircle className="mr-2 h-5 w-5 text-blue-800" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -398,7 +399,7 @@ export default function Home() {
             <Link href="/voorwaarden" className="text-sm font-medium text-blue-800 hover:underline underline-offset-4">
               Voorwaarden
             </Link>
-            <Link href="#" className="text-sm font-medium text-blue-800 hover:underline underline-offset-4">
+            <Link href="#booking" className="text-sm font-medium text-blue-800 hover:underline underline-offset-4">
               Contact
             </Link>
           </nav>
