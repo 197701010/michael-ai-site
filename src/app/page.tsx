@@ -17,7 +17,7 @@ const lezingenData = [
   {
     title: "De Menselijke Kant van AI",
     description: "Hoe we menselijke waarden kunnen behouden in een steeds meer door AI gedreven wereld.",
-    duration: "45 minuten",
+    duration: "90 minuten",
     imageSrc: "/images/lezingen/lezing-2.jpg",
   },
   {
@@ -29,7 +29,7 @@ const lezingenData = [
   {
     title: "AI in de Dagelijkse Praktijk",
     description: "Praktische voorbeelden van hoe AI nu al wordt toegepast in verschillende sectoren.",
-    duration: "60 minuten",
+    duration: "75 minuten",
     imageSrc: "/images/lezingen/lezing-4.jpg",
   },
   {
@@ -41,7 +41,7 @@ const lezingenData = [
   {
     title: "AI voor Niet-Techneuten",
     description: "Een toegankelijke introductie tot AI voor mensen zonder technische achtergrond.",
-    duration: "45 minuten",
+    duration: "60 minuten",
     imageSrc: "/images/lezingen/lezing-6.jpg",
   }
 ];
@@ -262,50 +262,51 @@ export default function Home() {
         </section>
 
         {/* Workshops Section */}
-        <section id="workshops" className="py-16 md:py-24">
-          <div className="container px-4 md:px-6">
-            {/* max-w-2xl behouden voor intro */}
-            <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
-                Inspiratie Workshops
-              </h2>
-              <p className="mx-auto text-gray-500 text-base md:text-xl">
-                Naast lezingen verzorg ik ook interactieve workshops om teams te inspireren en AI toe te passen in de praktijk.
-              </p>
+<section id="workshops" className="py-16 md:py-24">
+  <div className="container px-4 md:px-6">
+    {/* Titel en introductie centreren en max-width geven */}
+    <div className="text-center space-y-4 max-w-2xl mx-auto mb-12"> {/* Aangepast naar max-w-2xl voor smallere intro, kan ook max-w-3xl zijn */}
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
+        Inspiratie Workshops
+      </h2>
+      <p className="mx-auto text-gray-500 text-base md:text-xl">
+        Naast lezingen verzorg ik ook interactieve workshops om teams te inspireren en AI toe te passen in de praktijk.
+      </p>
+    </div>
+    {/* Kaarten grid */}
+    <div className="mt-12 grid max-w-5xl mx-auto grid-cols-1 md:grid-cols-2 gap-8">
+      {workshopsData.map((workshop, index) => (
+        <div key={index} className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden">
+          {workshop.imageSrc && (
+            <div className="relative w-full aspect-[4/3]">
+              <Image
+                src={workshop.imageSrc}
+                alt={`Afbeelding voor ${workshop.title}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw" // Voorbeeld, pas aan!
+              />
             </div>
-            {/* Kaarten grid, max-w-5xl is vaak goed voor 2 kolommen. Kan naar max-w-4xl. */}
-            <div className="mt-12 grid max-w-5xl mx-auto grid-cols-1 md:grid-cols-2 gap-8">
-              {workshopsData.map((workshop, index) => (
-                <div key={index} className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden">
-                  {workshop.imageSrc && (
-                    <div className="relative w-full aspect-[4/3]">
-                      <Image
-                        src={workshop.imageSrc}
-                        alt={`Afbeelding voor ${workshop.title}`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    </div>
-                  )}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div>
-                      <h3 className="text-xl font-bold text-blue-800 text-center sm:text-left">{workshop.title}</h3>
-                      <p className="mt-2 text-gray-500 text-center sm:text-left flex-grow min-h-[4rem]">{workshop.description}</p>
-                    </div>
-                    <ul className="mt-auto pt-4 text-sm text-gray-500 space-y-2">
-                      {workshop.details.map((detail, i) => (
-                        <li key={i} className="flex items-center justify-center sm:justify-start">
-                          <CheckCircle className="mr-2 h-4 w-4 text-blue-800" /> {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+          )}
+          <div className="p-6 flex flex-col flex-grow">
+            <div>
+              <h3 className="text-xl font-bold text-blue-800 text-center sm:text-left">{workshop.title}</h3>
+              <p className="mt-2 text-gray-500 text-center sm:text-left flex-grow min-h-[4rem]">{workshop.description}</p>
+            </div>
+            <ul className="mt-auto pt-4 text-sm text-gray-500 space-y-2">
+              {workshop.details.map((detail, i) => (
+                // HIER IS DE AANPASSING: justify-center en sm:justify-start zijn verwijderd
+                <li key={i} className="flex items-center"> 
+                  <CheckCircle className="mr-2 h-4 w-4 text-blue-800" /> {detail}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
         {/* Transformatie Trajecten Section */}
         <section id="trajecten" className="py-16 md:py-24 bg-slate-50">
