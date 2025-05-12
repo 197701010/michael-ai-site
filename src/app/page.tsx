@@ -1,12 +1,12 @@
 // src/app/page.tsx
-"use client"; // Nodig voor useState en event handlers
+"use client";
 
 import Link from "next/link";
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, MessageSquare, Users, Clock, CheckCircle } from "lucide-react";
-import BookingForm from "@/components/booking-form-new";
-import React, { useState } from "react"; // Importeer useState
+import BookingForm from "@/components/booking-form-new"; // Controleer dit pad
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -16,234 +16,203 @@ import {
   DialogTrigger,
   DialogFooter,
   DialogClose,
-} from "@/components/ui/dialog"; // Importeer Dialog componenten
-import ReactMarkdown from 'react-markdown'; // Importeer react-markdown
+} from "@/components/ui/dialog"; // Zorg dat dit correct is geïnstalleerd
+import ReactMarkdown from 'react-markdown'; // Zorg dat dit is geïnstalleerd
 
-// Data voor Lezingen met bijgewerkte descriptions en altText
-const lezingenData = [
+// --- DATA INTERFACE ---
+interface DataItem {
+  id: string;
+  title: string;
+  description: string;       // Tekst voor op de kaart
+  imageSrc?: string;
+  altText?: string;
+  duration?: string;         // Voor lezing
+  keyPoints?: string[];      // Voor workshop (bullet points)
+  features?: string[];       // Voor transformatie (bullet points)
+  modalDetails?: string[];   // Array van strings voor uitgebreide info in modal (Markdown toegestaan)
+}
+
+// --- DATA ARRAYS (Vul aan met al jouw items!) ---
+const lezingenData: DataItem[] = [
   {
     id: "lezing-1",
     title: "AI voor Besluitvormers",
-    description: "Ontdek hoe u als leider AI kunt inzetten voor scherpere inzichten en betere strategische beslissingen, zonder technisch expert te hoeven zijn. Leer de principes van AI-gedreven besluitvorming en identificeer concrete kansen.",
-    duration: "60-90 minuten (aanpasbaar)",
-    imageSrc: "/images/lezingen/lezing-1.jpg",
-    altText: "Conceptuele afbeelding over data-analyse en AI voor zakelijke beslissingen",
-    details: [
+    description: "Ontdek hoe u als leider AI kunt inzetten voor scherpere inzichten en betere strategische beslissingen, zonder technisch expert te hoeven zijn.",
+    duration: "60-90 minuten", // Of aanpasbaar
+    imageSrc: "/images/lezingen/lezing-1.jpg", // Voorbeeldpad
+    altText: "Data analyse en AI voor zakelijke beslissingen",
+    modalDetails: [
       "**Doelgroep:** Bestuurders, managers, en directieleden die de potentie van AI voor hun organisatie willen ontsluiten.",
-      "**Kernboodschap:** Leer de principes van AI-gedreven besluitvorming, identificeer concrete AI-kansen, en krijg handvatten om AI-projecten te sturen en te evalueren.",
-      "**Resultaat:** U verlaat de lezing met direct toepasbare inzichten en een helder beeld van hoe AI uw besluitvormingsprocessen kan versterken, met behoud van menselijk overzicht en ethische verantwoordelijkheid.",
-      "**Mijn Unieke Aanpak:** Ik combineer strategisch inzicht met een gave om complexe technologie toegankelijk te maken, specifiek gericht op de vragen en uitdagingen van leiders."
+      "**Kernboodschap:** Leer de principes van AI-gedreven besluitvorming, identificeer concrete AI-kansen, en krijg handvatten om AI-projecten te sturen.",
+      "**Resultaat:** Direct toepasbare inzichten en een helder beeld van hoe AI uw besluitvormingsprocessen kan versterken."
     ]
   },
   {
     id: "lezing-2",
     title: "De Menselijke Kant van AI",
-    description: "Verken de ethische en sociale impact van AI. Ontdek strategieën voor transparantie, eerlijkheid en menselijke controle in AI-systemen voor een verantwoorde implementatie.",
+    description: "Verken de ethische en sociale impact van AI. Ontdek strategieën voor transparantie, eerlijkheid en menselijke controle.",
     duration: "90 minuten",
     imageSrc: "/images/lezingen/lezing-2.jpg",
-    altText: "Symbolische weergave van menselijke en kunstmatige intelligentie die samenwerken",
-    details: [
+    altText: "Menselijke en kunstmatige intelligentie die samenwerken",
+     modalDetails: [
         "**Focus:** De ethische, sociale en culturele impact van AI op individu, organisatie en maatschappij.",
-        "**Inhoud:** Strategieën voor het waarborgen van transparantie, eerlijkheid, privacy en menselijke controle in AI-systemen.",
-        "**Resultaat:** Concrete handvatten en een ethisch kompas om AI op een verantwoorde, mensgerichte manier te implementeren en te gebruiken.",
-        "**Mijn Unieke Aanpak:** Een gebalanceerd perspectief dat zowel de technologische mogelijkheden als de cruciale menselijke en maatschappelijke waarden belicht."
+        "**Inhoud:** Strategieën voor het waarborgen van transparantie, eerlijkheid, privacy en menselijke controle.",
+        "**Resultaat:** Concrete handvatten en een ethisch kompas om AI op een verantwoorde, mensgerichte manier te implementeren."
     ]
   },
-  {
+   {
     id: "lezing-3",
     title: "AI Trends en Toekomstvisie",
-    description: "Een helder overzicht van cutting-edge AI-trends zoals Generative AI en XAI, en een inspirerende blik op hoe u strategisch kunt anticiperen op de volgende innovatiegolf.",
+    description: "Een helder overzicht van cutting-edge AI-trends zoals Generative AI en XAI, en een blik op hoe u strategisch kunt anticiperen.",
     duration: "75 minuten",
     imageSrc: "/images/lezingen/lezing-3.jpg",
-    altText: "Futuristische visualisatie van AI-trends en technologische vooruitgang",
-    details: [
-        "**Inhoud:** Verkenning van cutting-edge AI-trends zoals Generative AI, Explainable AI (XAI), en de impact op diverse sectoren.",
-        "**Perspectief:** Realistische toekomstscenario's, kansen en uitdagingen, en hoe proactief te anticiperen op de volgende golf van AI-innovatie.",
-        "**Resultaat:** Een geïnformeerde en geïnspireerde kijk op de toekomst, stelt u in staat strategisch vooruit te denken en uw organisatie voor te bereiden."
-    ]
+    altText: "Futuristische visualisatie van AI-trends",
+    modalDetails: ["**Inhoud:** Verkenning van cutting-edge AI-trends zoals Generative AI, Explainable AI (XAI), en de impact op diverse sectoren.", "**Perspectief:** Realistische toekomstscenario's, kansen en uitdagingen.", "**Resultaat:** Een geïnformeerde en geïnspireerde kijk op de toekomst, stelt u in staat strategisch vooruit te denken."]
   },
   {
     id: "lezing-4",
     title: "AI in de Dagelijkse Praktijk",
-    description: "Ontdek met tastbare use-cases en succesverhalen hoe AI processen optimaliseert en nieuwe mogelijkheden creëert. Krijg inspiratie voor uw eigen werkveld.",
+    description: "Ontdek met tastbare use-cases hoe AI processen optimaliseert en nieuwe mogelijkheden creëert. Krijg inspiratie voor uw werkveld.",
     duration: "75 minuten",
     imageSrc: "/images/lezingen/lezing-4.jpg",
-    altText: "Moderne iconen van diverse sectoren verbonden door een AI-netwerk",
-    details: [
-        "**Focus:** Tastbare use-cases en succesverhalen van AI-implementaties in o.a. marketing, klantenservice, operations en HR.",
-        "**Inzichten:** Leer van best practices, valkuilen en de praktische stappen om AI succesvol in uw eigen werkveld toe te passen.",
-        "**Resultaat:** Een schat aan direct toepasbare ideeën en inspiratie om AI-projecten in uw eigen organisatie te starten of te verbeteren."
-    ]
+    altText: "Diverse sectoren verbonden door een AI-netwerk",
+    modalDetails: ["**Focus:** Tastbare use-cases en succesverhalen van AI-implementaties in marketing, klantenservice, operations en HR.", "**Inzichten:** Leer van best practices, valkuilen en praktische stappen.", "**Resultaat:** Een schat aan direct toepasbare ideeën en inspiratie voor AI-projecten."]
   },
   {
     id: "lezing-5",
     title: "Ethiek en AI",
-    description: "Een essentiële discussie over ethische dilemma's en verantwoordelijkheden in AI, met handvatten voor het ontwikkelen van ethische richtlijnen.",
+    description: "Een essentiële discussie over ethische dilemma's en verantwoordelijkheden in AI, met handvatten voor ethische richtlijnen.",
     duration: "90 minuten",
     imageSrc: "/images/lezingen/lezing-5.jpg",
-    altText: "Abstracte weegschaal die de balans tussen AI en ethiek symboliseert",
-    details: [
-        "**Kernvragen:** Hoe zorgen we voor eerlijke, transparante en non-discriminatoire AI? Wie is verantwoordelijk? Hoe borgen we privacy en autonomie?",
-        "**Aanpak:** Analyse van ethische frameworks, casestudies en interactieve discussie om bewustzijn en kritisch denken te bevorderen.",
-        "**Resultaat:** Een dieper begrip van de ethische dimensies van AI en handvatten om ethische richtlijnen binnen uw organisatie te ontwikkelen en te implementeren."
-    ]
+    altText: "Weegschaal die de balans tussen AI en ethiek symboliseert",
+    modalDetails: ["**Kernvragen:** Hoe zorgen we voor eerlijke, transparante en non-discriminatoire AI? Wie is verantwoordelijk?", "**Aanpak:** Analyse van ethische frameworks, casestudies en interactieve discussie.", "**Resultaat:** Een dieper begrip van de ethische dimensies en handvatten om richtlijnen te implementeren."]
   },
   {
     id: "lezing-6",
     title: "AI voor Niet-Techneuten",
-    description: "Een heldere introductie tot AI zonder technisch jargon. Krijg een solide basiskennis om met vertrouwen mee te praten over AI-ontwikkelingen.",
+    description: "Een heldere introductie tot AI zonder technisch jargon. Krijg een solide basiskennis om met vertrouwen mee te praten.",
     duration: "60 minuten",
     imageSrc: "/images/lezingen/lezing-6.jpg",
-    altText: "Heldere, verlichte weg die complexe AI-concepten toegankelijk maakt",
-    details: [
-        "**Doel:** Demystificeren van AI-jargon en complexe concepten uitleggen in begrijpelijke taal.",
-        "**Inhoud:** Wat is AI (niet)? Wat zijn de belangrijkste toepassingen? Hoe beïnvloedt AI uw werk en leven?",
-        "**Resultaat:** Een solide basiskennis van AI, waardoor u met meer vertrouwen kunt meepraten over en anticiperen op AI-ontwikkelingen."
-    ]
+    altText: "Toegankelijke weg die complexe AI-concepten symboliseert",
+    modalDetails: ["**Doel:** Demystificeren van AI-jargon en complexe concepten uitleggen.", "**Inhoud:** Wat is AI (niet)? Belangrijkste toepassingen? Impact op werk en leven?", "**Resultaat:** Een solide basiskennis om met vertrouwen mee te praten over AI-ontwikkelingen."]
   }
+  // ... voeg eventueel meer lezingen toe
 ];
 
-// Data voor Workshops met bijgewerkte descriptions en altText
-const workshopsData = [
+const workshopsData: DataItem[] = [
   {
     id: "workshop-1",
     title: "AI Innovatie Workshop",
-    description: "Een hands-on workshop waarin teams via design thinking en co-creatie concrete AI-kansen identificeren en eerste concepten ontwikkelen.",
-    details: [ // Bullet points voor op de kaart
+    description: "Een hands-on workshop waarin teams via design thinking concrete AI-kansen identificeren en eerste concepten ontwikkelen.",
+    keyPoints: [
       "Duur: Halve dag (4 uur)",
       "Voor teams van 5–20 personen",
       "Inclusief werkmateriaal"
     ],
     imageSrc: "/images/workshops/workshop-1.jpg",
-    altText: "Team dat samenwerkt aan innovatieve AI-ideeën tijdens een workshop",
-    uitgebreideDetails: [ // Uitgebreide tekst voor de modal
+    altText: "Team dat samenwerkt aan AI-ideeën",
+    modalDetails: [
         "**Focus:** Identificeren van concrete AI-kansen en ontwikkelen van innovatieve oplossingen specifiek voor uw organisatie.",
-        "**Methode:** Een energieke mix van hands-on oefeningen, design thinking methodologieën, en co-creatieve brainstormsessies om direct tot de kern te komen.",
-        "**Resultaat:** Een concrete lijst met direct toepasbare, potentiële AI-projecten, vaak inclusief eerste prototypes of uitgewerkte concepten. Uw team verlaat de workshop met nieuwe energie en een innovatieve mindset."
+        "**Methode:** Een energieke mix van hands-on oefeningen, design thinking methodologieën, en co-creatieve brainstormsessies.",
+        "**Resultaat:** Een concrete lijst met toepasbare, potentiële AI-projecten, vaak inclusief eerste prototypes. Team verlaat workshop met nieuwe energie."
     ]
   },
   {
     id: "workshop-2",
-    title: "Toekomstgericht Denken",
-    description: "Ontwikkel een langetermijnstrategie voor AI-integratie, anticipeer op trends en bereid uw team voor op de impact van AI op uw sector.",
-    details: [
+    title: "Toekomstgericht Denken met AI",
+    description: "Ontwikkel een langetermijnstrategie voor AI-integratie, anticipeer op trends en bereid uw team voor op de impact van AI.",
+    keyPoints: [
       "Duur: Volledige dag (7 uur)",
       "Voor teams van 5–15 personen",
-      "Inclusief lunch & werkmateriaal"
+      "Inclusief lunch & materiaal"
     ],
     imageSrc: "/images/workshops/workshop-2.jpg",
-    altText: "Modern kompas dat de richting wijst naar strategisch toekomstdenken met AI",
-    uitgebreideDetails: [
-        "**Doel:** Uw team helpen voorbij de waan van de dag te kijken en een robuuste, adaptieve langetermijnstrategie voor AI-integratie te ontwikkelen.",
-        "**Aanpak:** Interactieve sessies gericht op scenarioplanning, impactanalyse van toekomstige AI-trends op uw specifieke sector, en het formuleren van een flexibele strategische roadmap.",
-        "**Resultaat:** Een toekomstbestendige AI-visie, concrete strategische pijlers voor de komende 1-3 jaar, en een team dat beter is uitgerust om proactief in te spelen op technologische veranderingen."
-    ]
+    altText: "Kompas dat wijst naar strategisch toekomstdenken met AI",
+    modalDetails: ["**Doel:** Uw team helpen een robuuste, adaptieve langetermijnstrategie voor AI-integratie te ontwikkelen.", "**Aanpak:** Interactieve sessies gericht op scenarioplanning, impactanalyse en het formuleren van een flexibele roadmap.", "**Resultaat:** Een toekomstbestendige AI-visie, strategische pijlers voor 1-3 jaar, en een team klaar voor verandering."]
   },
-  {
+   {
     id: "workshop-3",
     title: "AI for Executives",
-    description: "Een exclusieve sessie voor leiders om AI strategisch te verankeren in bedrijfsdoelstellingen, investeringen te beoordelen en AI-gedreven verandering te leiden.",
-    details: [
+    description: "Exclusieve sessie voor leiders om AI strategisch te verankeren, investeringen te beoordelen en verandering te leiden.",
+    keyPoints: [
       "Duur: 3 uur",
       "Voor executives en beslissers",
       "Inclusief strategisch canvas"
     ],
     imageSrc: "/images/workshops/workshop-3.jpg",
-    altText: "Professionele setting die strategische AI-besluitvorming voor leidinggevenden symboliseert",
-    uitgebreideDetails: [
-        "**Gericht op:** CEO's, directieleden, en senior managers die AI niet als een losse tool zien, maar als een integraal onderdeel van de bedrijfsstrategie.",
-        "**Inhoud:** Identificeren van high-impact AI use cases die direct bijdragen aan bedrijfsdoelen, het opstellen van business cases, het beoordelen van AI-investeringen, het managen van implementatierisico's, en het effectief leiden van AI-gedreven verandering binnen de organisatie.",
-        "**Resultaat:** Een scherper begrip van de strategische implicaties van AI, een praktisch framework voor AI-governance en besluitvorming, en de concrete vaardigheden om AI-initiatieven succesvol te overzien en te sturen."
-    ]
+    altText: "Strategische AI-besluitvorming voor leidinggevenden",
+    modalDetails: ["**Gericht op:** Leiders die AI zien als integraal onderdeel van de strategie.", "**Inhoud:** Identificeren van high-impact use cases, business cases opstellen, investeringen beoordelen, risico's managen en verandering leiden.", "**Resultaat:** Scherp begrip van strategische implicaties, framework voor governance, en vaardigheden om initiatieven te sturen."]
   },
   {
     id: "workshop-4",
     title: "Storytelling with AI",
-    description: "Leer hoe AI kan helpen bij contentideeën, personalisatie en analyse voor krachtigere communicatie en een dieper begrip van uw doelgroep.",
-    details: [
+    description: "Leer hoe AI helpt bij contentideeën, personalisatie en analyse voor krachtigere communicatie en doelgroepbegrip.",
+    keyPoints: [
       "Duur: 4 uur",
-      "Voor marketing en communicatieprofessionals",
-      "Hands-on met AI schrijftools"
+      "Voor marketing/communicatie",
+      "Hands-on met AI tools"
     ],
     imageSrc: "/images/workshops/workshop-4.jpg",
-    altText: "Visualisatie van hoe AI helpt bij het creëren van krachtige, digitale verhalen",
-    uitgebreideDetails: [
-        "**Inhoud:** Ontdek hoe AI-tools kunnen assisteren bij het genereren van creatieve content ideeën, het schrijven en optimaliseren van teksten, het personaliseren van boodschappen voor verschillende segmenten, en het analyseren van de effectiviteit van uw communicatie-uitingen.",
-        "**Tools & Technieken:** Kennismaking en hands-on oefeningen met relevante en toegankelijke AI-gedreven contentcreatie-, analyse- en personalisatietools.",
-        "**Resultaat:** Verbeterde vaardigheden om AI effectief in te zetten voor overtuigende storytelling, het ontwikkelen van datagedreven contentstrategieën, en het verkrijgen van een dieper, genuanceerd begrip van uw doelgroep."
-    ]
+    altText: "Visualisatie van AI die helpt bij digitale verhalen",
+    modalDetails: ["**Inhoud:** Ontdek hoe AI assisteert bij content generatie, optimalisatie, personalisatie en analyse.", "**Tools & Technieken:** Kennismaking en oefeningen met relevante AI-tools.", "**Resultaat:** Verbeterde vaardigheden voor overtuigende storytelling, datagedreven strategieën, en dieper doelgroepbegrip."]
   }
+  // ... voeg eventueel meer workshops toe
 ];
 
-// Data voor Transformatie Trajecten met bijgewerkte descriptions en altText
-const transformatieData = [
+const transformatieData: DataItem[] = [
   {
     id: "transformatie-1",
     title: "AI Ready Traject",
-    description: "Een gefaseerd traject van analyse (AI Readiness Scan) tot strategie en pilot-implementatie, resulterend in een gedragen AI-strategie en succesvolle eerste AI-toepassingen, volledig afgestemd op uw organisatie.",
+    description: "Gefaseerd traject van analyse (AI Scan) tot strategie en pilot-implementatie, resulterend in een gedragen AI-strategie.",
     features: [
       "Van strategie tot implementatie",
-      "Inclusief workshops, scans en roadmap",
+      "Inclusief workshops & scans",
       "Op maat voor jouw organisatie"
     ],
     imageSrc: "/images/transformatie/transformatie-1.jpg",
-    altText: "Symbolische weergave van een organisatie die transformeert naar AI-gereedheid",
-    details: [
-        "**Probleem Opgelost:** Helpt organisaties die AI willen implementeren maar niet weten waar te beginnen of hoe een effectieve strategie te ontwikkelen die aansluit bij hun unieke context.",
-        "**Mijn Aanpak:** Een gestructureerd en interactief traject, beginnend met een grondige analyse van uw huidige situatie en AI-potentieel (AI Readiness Scan). Gevolgd door co-creatie van een heldere visie en een pragmatische roadmap, begeleiding bij het selecteren en uitvoeren van impactvolle pilot-projecten, en verankering van kennis binnen uw team.",
-        "**Concrete Resultaten:** Een breed gedragen en direct uitvoerbare AI-strategie, een portfolio van geïdentificeerde quick wins en lange termijn strategische kansen, succesvol gelanceerde eerste AI-toepassingen met meetbare impact, en een team dat is voorbereid en gemotiveerd voor verdere AI-integratie.",
-        "**Doorlooptijd:** De duur is flexibel en afhankelijk van de scope en complexiteit, typisch 2-4 maanden voor de strategische definitie en het opstarten van de eerste pilots."
+    altText: "Organisatie die transformeert naar AI-gereedheid",
+    modalDetails: [
+        "**Probleem Opgelost:** Helpt organisaties die AI willen implementeren maar niet weten waar te beginnen.",
+        "**Mijn Aanpak:** Gestructureerd traject: analyse (AI Scan), co-creatie visie & roadmap, begeleiding pilots, kennisverankering.",
+        "**Concrete Resultaten:** Uitvoerbare AI-strategie, geïdentificeerde kansen, succesvol gelanceerde pilots, voorbereid team."
     ]
   },
   {
     id: "transformatie-2",
     title: "Interim AI Leadership",
-    description: "Direct beschikbare, ervaren AI-leiderschap om uw AI-transformatie te sturen. Ik integreer in uw team, leid projecten en coach intern talent voor duurzame AI-verankering en meetbare resultaten.",
+    description: "Direct beschikbare, ervaren AI-leiderschap om uw AI-transformatie te sturen, projecten te leiden en intern talent te coachen.",
     features: [
-      "Directe AI-leiderschap en executiekracht",
-      "Strategieontwikkeling en implementatiebegeleiding",
-      "Opbouw van interne AI-competenties"
+      "Directe AI-leiderschap",
+      "Strategie & implementatie",
+      "Opbouw interne competenties"
     ],
     imageSrc: "/images/transformatie/transformatie-2.jpg",
-    altText: "Conceptuele afbeelding van daadkrachtig AI-leiderschap tijdens digitale transities",
-    details: [
-      "**Probleem Opgelost:** Overbrugt het cruciale gat van direct beschikbare, senior AI-expertise en leiderschapscapaciteit die nodig is om complexe en strategische AI-transformaties succesvol te navigeren en te borgen binnen uw organisatie.",
-      "**Mijn Aanpak:** Een naadloze, tijdelijke integratie in uw management- of projectteam. Ik neem de strategische en operationele leiding op me, manage AI-projecten hands-on, en zorg voor intensieve coaching en kennisoverdracht aan uw interne talent om toekomstige zelfredzaamheid te garanderen.",
-      "**Concrete Resultaten:** Een versneld geïmplementeerde AI-strategie, succesvol gelanceerde en gemanagede pilotprojecten met duidelijke ROI, significant verhoogde interne AI-capaciteit en -kennis, en een organisatiecultuur die AI omarmt en klaar is voor continue innovatie.",
-      "**Doorlooptijd:** Zichtbare resultaten en een stevig fundament voor verdere groei worden typisch gerealiseerd binnen een periode van 3-6 maanden, afhankelijk van de specifieke opdracht en doelstellingen.",
-      "**Mijn Unieke Waarde:** Ik combineer diepgaande technologische kennis met een scherp oog voor de menselijke en organisatorische dynamiek, waardoor AI niet slechts een project wordt, maar een integraal en breed geaccepteerd onderdeel van uw strategisch succes."
+    altText: "Daadkrachtig AI-leiderschap tijdens transities",
+     modalDetails: [
+      "**Probleem Opgelost:** Overbrugt het gat van direct beschikbare, senior AI-expertise en leiderschap.",
+      "**Mijn Aanpak:** Naadloze integratie in uw team, strategische en operationele leiding, hands-on projectmanagement, coaching en kennisoverdracht.",
+      "**Concrete Resultaten:** Versnelde strategie-implementatie, succesvolle pilots met ROI, verhoogde interne AI-capaciteit, cultuur die AI omarmt."
     ]
   }
+  // ... voeg eventueel meer trajecten toe
 ];
 
 
 export default function Home() {
-  const [selectedItem, setSelectedItem] = useState<any | null>(null); // State voor de modal
+  // State en handlers blijven hetzelfde
+  const [selectedItem, setSelectedItem] = useState<DataItem | null>(null);
 
-  // Functie om de modal te openen met de data van het geklikte item
-  const openDetailsModal = (item: any) => {
+  const openDetailsModal = (item: DataItem) => {
     setSelectedItem(item);
   };
 
-  // Functie om de modal te sluiten
   const closeDetailsModal = () => {
     setSelectedItem(null);
   };
-
-  // Helper functie om Markdown-achtige strings naar HTML te converteren voor de modal
-  // Dit is een zeer simpele parser, voor complexere markdown gebruik je beter een library zoals react-markdown
-  const renderMarkdownParagraphs = (textArray: string[] | undefined) => {
-    if (!textArray || textArray.length === 0) {
-      return <p>Geen verdere details beschikbaar.</p>;
-    }
-    return textArray.map((paragraph, index) => (
-      <p key={index} className="mb-2 last:mb-0" dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />') }} />
-    ));
-  };
-
-
+  
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Header blijft hetzelfde */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center px-4 sm:px-4 md:px-6">
           <Link href="/" className="font-bold text-xl text-blue-800">
@@ -273,7 +242,7 @@ export default function Home() {
       </header>
 
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Hero en About secties blijven hetzelfde */}
         <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
@@ -300,7 +269,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About Section - Met bijgewerkte tekst */}
         <section id="about" className="py-16 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center max-w-4xl mx-auto">
@@ -343,7 +311,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Topics Section (Lezingen) */}
+        {/* === Topics Section (Lezingen) - Nu met .map() === */}
         <section id="topics" className="py-16 md:py-24 bg-slate-50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-2xl mx-auto mb-12">
@@ -354,26 +322,26 @@ export default function Home() {
                 </p>
               </div>
             </div>
+            {/* Gebruik .map() om door lezingenData te itereren */}
             <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {lezingenData.map((topic) => (
+                // De Dialog en kaart structuur blijft hetzelfde als in de vorige versie
                 <Dialog key={topic.id}>
                   <DialogTrigger asChild>
-                    <div className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden cursor-pointer hover:shadow-lg transition-shadow">
+                     <div 
+                      className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+                      onClick={() => openDetailsModal(topic)}
+                    >
+                      {/* Kaart inhoud (afbeelding, titel, korte description, duration) */}
                       {topic.imageSrc && (
                         <div className="relative w-full aspect-video">
-                          <Image
-                            src={topic.imageSrc}
-                            alt={topic.altText}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          />
+                          <Image src={topic.imageSrc} alt={topic.altText || ''} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                         </div>
                       )}
                       <div className="p-6 flex flex-col flex-grow">
                         <div>
                           <h3 className="text-xl font-bold text-blue-800 text-center sm:text-left">{topic.title}</h3>
-                          <p className="mt-2 text-gray-500 text-sm text-center sm:text-left flex-grow min-h-[6rem]">{topic.description}</p>
+                          <p className="mt-2 text-gray-500 text-sm text-center sm:text-left flex-grow min-h-[7rem]">{topic.description}</p>
                         </div>
                         <div className="mt-auto pt-4 flex items-center text-sm text-gray-500 justify-center sm:justify-start">
                           <Clock className="mr-1 h-4 w-4" />
@@ -382,53 +350,38 @@ export default function Home() {
                       </div>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl text-blue-800">{topic.title}</DialogTitle>
-                      {topic.imageSrc && (
-                        <div className="relative w-full aspect-video mt-4 mb-2 rounded overflow-hidden">
-                          <Image src={topic.imageSrc} alt={topic.altText} fill className="object-cover" />
-                        </div>
-                      )}
-                    </DialogHeader>
-                    <div className="prose prose-sm sm:prose-base max-w-none py-4 text-gray-700">
-                      {renderMarkdownParagraphs(topic.details)}
-                    </div>
-                    <DialogFooter className="sm:justify-start">
-                        <p className="text-sm text-gray-600"><Clock className="inline mr-1 h-4 w-4" />Duur: {topic.duration}</p>
-                    </DialogFooter>
-                  </DialogContent>
+                  {/* DialogContent wordt buiten de map geplaatst en gebruikt 'selectedItem' state */}
                 </Dialog>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Workshops Section */}
+        {/* === Workshops Section - Nu met .map() === */}
         <section id="workshops" className="py-16 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
+               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
                 Inspiratie Workshops
               </h2>
               <p className="mx-auto text-gray-500 text-base md:text-xl">
                 Naast lezingen verzorg ik ook interactieve workshops om teams te inspireren en AI toe te passen in de praktijk.
               </p>
             </div>
+            {/* Gebruik .map() om door workshopsData te itereren */}
             <div className="mt-12 grid max-w-4xl mx-auto grid-cols-1 md:grid-cols-2 gap-8">
               {workshopsData.map((workshop) => (
+                // De Dialog en kaart structuur blijft hetzelfde
                 <Dialog key={workshop.id}>
                   <DialogTrigger asChild>
-                    <div className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden cursor-pointer hover:shadow-lg transition-shadow">
+                    <div 
+                      className="flex flex-col rounded-lg border bg-white shadow-sm overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+                      onClick={() => openDetailsModal(workshop)}
+                    >
+                      {/* Kaart inhoud (afbeelding, titel, korte description, keyPoints) */}
                       {workshop.imageSrc && (
                         <div className="relative w-full aspect-[4/3]">
-                          <Image
-                            src={workshop.imageSrc}
-                            alt={workshop.altText}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
+                          <Image src={workshop.imageSrc} alt={workshop.altText || ''} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
                         </div>
                       )}
                       <div className="p-6 flex flex-col flex-grow">
@@ -436,9 +389,8 @@ export default function Home() {
                           <h3 className="text-xl font-bold text-blue-800 text-center sm:text-left">{workshop.title}</h3>
                           <p className="mt-2 text-gray-500 text-sm text-center sm:text-left flex-grow min-h-[4rem]">{workshop.description}</p>
                         </div>
-                        {/* De bullet points (workshop.details) blijven op de kaart */}
                         <ul className="mt-auto pt-4 text-sm text-gray-500 space-y-2">
-                          {workshop.details.map((detail, i) => (
+                          {workshop.keyPoints?.map((detail, i) => (
                             <li key={i} className="flex items-center">
                               <CheckCircle className="mr-2 h-4 w-4 text-blue-800" /> {detail}
                             </li>
@@ -447,58 +399,38 @@ export default function Home() {
                       </div>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl text-blue-800">{workshop.title}</DialogTitle>
-                      {workshop.imageSrc && (
-                        <div className="relative w-full aspect-[4/3] mt-4 mb-2 rounded overflow-hidden">
-                          <Image src={workshop.imageSrc} alt={workshop.altText} fill className="object-cover" />
-                        </div>
-                      )}
-                    </DialogHeader>
-                    <div className="prose prose-sm sm:prose-base max-w-none py-4 text-gray-700">
-                      {renderMarkdownParagraphs(workshop.uitgebreideDetails)}
-                    </div>
-                    <DialogFooter className="sm:justify-start">
-                      {/* Je kunt hier de details (bullet points) nogmaals tonen als je wilt, of andere info */}
-                      <ul className="text-sm text-gray-600 space-y-1">
-                        {workshop.details.map((detail, i) => (
-                            <li key={i}><CheckCircle className="inline mr-1 h-4 w-4 text-blue-700" />{detail}</li>
-                        ))}
-                      </ul>
-                    </DialogFooter>
-                  </DialogContent>
+                  {/* DialogContent wordt buiten de map geplaatst */}
                 </Dialog>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Transformatie Trajecten Section */}
+        {/* === Transformatie Trajecten Section - Nu met .map() === */}
         <section id="trajecten" className="py-16 md:py-24 bg-slate-50">
           <div className="container px-4 sm:px-4 md:px-6">
             <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
+               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
                 Transformatie Trajecten
               </h2>
               <p className="mx-auto text-gray-500 text-base md:text-xl">
                 Klaar om je organisatie klaar te stomen voor het AI-tijdperk? Kies uit twee krachtige vormen van samenwerking.
               </p>
             </div>
+            {/* Gebruik .map() om door transformatieData te itereren */}
             <div className="mt-12 grid max-w-4xl mx-auto grid-cols-1 md:grid-cols-2 gap-8">
               {transformatieData.map((traject) => (
+                 // De Dialog en kaart structuur blijft hetzelfde
                 <Dialog key={traject.id}>
                   <DialogTrigger asChild>
-                    <div className="flex flex-col rounded-lg border bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer">
+                    <div 
+                      className="flex flex-col rounded-lg border bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer"
+                      onClick={() => openDetailsModal(traject)}
+                    >
+                      {/* Kaart inhoud (afbeelding, titel, korte description, features) */}
                       {traject.imageSrc && (
                         <div className="relative w-full aspect-[3/2]">
-                          <Image
-                            src={traject.imageSrc}
-                            alt={traject.altText}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
+                          <Image src={traject.imageSrc} alt={traject.altText || ''} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
                         </div>
                       )}
                       <div className="p-6 flex flex-col flex-grow">
@@ -506,9 +438,8 @@ export default function Home() {
                           <h3 className="text-xl font-bold text-blue-800">{traject.title}</h3>
                           <p className="mt-2 text-gray-600 flex-grow min-h-[7rem]">{traject.description}</p>
                         </div>
-                         {/* De features (bullet points) blijven op de kaart */}
                         <ul className="mt-auto pt-4 text-sm text-gray-800 space-y-2">
-                          {traject.features.map((feature, i) => (
+                          {traject.features?.map((feature, i) => (
                             <li key={i} className="flex items-center">
                               <CheckCircle className="mr-2 h-4 w-4 text-blue-800" />
                               {feature}
@@ -518,35 +449,15 @@ export default function Home() {
                       </div>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl text-blue-800">{traject.title}</DialogTitle>
-                      {traject.imageSrc && (
-                        <div className="relative w-full aspect-[3/2] mt-4 mb-2 rounded overflow-hidden">
-                          <Image src={traject.imageSrc} alt={traject.altText} fill className="object-cover" />
-                        </div>
-                      )}
-                    </DialogHeader>
-                    <div className="prose prose-sm sm:prose-base max-w-none py-4 text-gray-700">
-                      {renderMarkdownParagraphs(traject.details)}
-                    </div>
-                     <DialogFooter className="sm:justify-start">
-                       {/* Je kunt hier de features (bullet points) nogmaals tonen als je wilt */}
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        {traject.features.map((feature, i) => (
-                            <li key={i}><CheckCircle className="inline mr-1 h-4 w-4 text-blue-700" />{feature}</li>
-                        ))}
-                      </ul>
-                    </DialogFooter>
-                  </DialogContent>
+                  {/* DialogContent wordt buiten de map geplaatst */}
                 </Dialog>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Booking Section */}
-        <section id="booking" className="py-16 md:py-24 bg-slate-50">
+        {/* Booking Section blijft hetzelfde */}
+         <section id="booking" className="py-16 md:py-24 bg-slate-50">
           <div className="container px-4 md:px-6">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 max-w-3xl mx-auto">
               <div className="space-y-4">
@@ -571,12 +482,14 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-              <BookingForm />
+              <BookingForm /> {/* Zorg dat deze component bestaat en correct werkt */}
             </div>
           </div>
         </section>
+
       </main>
 
+      {/* Footer blijft hetzelfde */}
       <footer className="border-t py-6 md:py-8 bg-blue-50">
         <div className="container flex flex-col gap-4 md:flex-row md:items-center md:gap-8 px-4 md:px-6">
           <p className="text-sm text-gray-600">
@@ -596,54 +509,58 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Modal/Detail weergave (generiek voor alle items) */}
-      {selectedItem && (
-        // @ts-ignore - DialogContent and others will be typed by Shadcn UI if installed
-        <Dialog open={!!selectedItem} onOpenChange={(isOpen) => { if (!isOpen) closeDetailsModal(); }}>
-          <DialogContent className="sm:max-w-[650px] max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle className="text-2xl sm:text-3xl text-blue-800">{selectedItem.title}</DialogTitle>
-              {selectedItem.imageSrc && (
-                <div className="relative w-full aspect-video mt-4 mb-2 rounded overflow-hidden">
-                  <Image src={selectedItem.imageSrc} alt={selectedItem.altText || selectedItem.title} fill className="object-cover" />
-                </div>
-              )}
-              <DialogDescription className="sr-only">Details voor {selectedItem.title}</DialogDescription>
-            </DialogHeader>
-            <div className="prose prose-sm sm:prose-base max-w-none py-4 text-gray-700">
-              {/* Render de uitgebreide details */}
-              {renderMarkdownParagraphs(selectedItem.details || selectedItem.uitgebreideDetails)}
-            </div>
-            <DialogFooter className="sm:justify-start flex flex-col sm:flex-row gap-2 items-start">
-              {/* Toon duration als die bestaat */}
-              {selectedItem.duration && (
-                <p className="text-sm text-gray-600 flex items-center"><Clock className="inline mr-1.5 h-4 w-4" />Duur: {selectedItem.duration}</p>
-              )}
-              {/* Toon workshop details (bullet points) als die bestaan en het een workshop is */}
-              {selectedItem.details && workshopsData.find(w => w.id === selectedItem.id) && (
-                 <ul className="text-sm text-gray-600 space-y-1 mt-2 sm:mt-0 sm:ml-4">
-                    {selectedItem.details.map((detail: string, index: number) => (
-                        <li key={index} className="flex items-center"><CheckCircle className="inline mr-1.5 h-4 w-4 text-blue-700" />{detail}</li>
-                    ))}
-                 </ul>
-              )}
-              {/* Toon transformatie features (bullet points) als die bestaan */}
-              {selectedItem.features && (
-                 <ul className="text-sm text-gray-600 space-y-1 mt-2 sm:mt-0 sm:ml-4">
-                    {selectedItem.features.map((feature: string, index: number) => (
-                        <li key={index} className="flex items-center"><CheckCircle className="inline mr-1.5 h-4 w-4 text-blue-700" />{feature}</li>
-                    ))}
-                 </ul>
-              )}
-            </DialogFooter>
-            <DialogClose asChild className="mt-4 sm:mt-0">
-              <Button type="button" variant="outline">
-                Sluiten
-              </Button>
-            </DialogClose>
-          </DialogContent>
-        </Dialog>
-      )}
+      {/* === Gedeelde Dialog Content (blijft buiten de .map loops) === */}
+      {/* Deze Dialog wordt geopend en gevuld op basis van de 'selectedItem' state */}
+       {selectedItem && (
+         <Dialog open={!!selectedItem} onOpenChange={(isOpen) => { if (!isOpen) closeDetailsModal(); }}>
+           <DialogContent className="sm:max-w-[650px] max-h-[90vh] overflow-y-auto">
+             <DialogHeader>
+               <DialogTitle className="text-2xl sm:text-3xl text-blue-800">{selectedItem.title}</DialogTitle>
+               {selectedItem.imageSrc && (
+                 <div className="relative w-full aspect-video mt-4 mb-2 rounded overflow-hidden">
+                   <Image src={selectedItem.imageSrc} alt={selectedItem.altText || selectedItem.title} fill className="object-cover" />
+                 </div>
+               )}
+               <DialogDescription className="sr-only">Uitgebreide details voor {selectedItem.title}</DialogDescription>
+             </DialogHeader>
+             {/* Render de modalDetails met ReactMarkdown */}
+             <div className="prose prose-sm sm:prose-base max-w-none py-4 text-gray-700">
+               {selectedItem.modalDetails?.map((paragraph, index) => (
+                 <ReactMarkdown key={index}>{paragraph}</ReactMarkdown>
+               ))}
+             </div>
+             {/* Footer van de modal met specifieke info */}
+             <DialogFooter className="sm:justify-start flex flex-col sm:flex-row gap-2 items-start">
+                {/* Toon duration als die bestaat (Lezing) */}
+                {selectedItem.duration && (
+                  <p className="text-sm text-gray-600 flex items-center"><Clock className="inline mr-1.5 h-4 w-4" />Duur: {selectedItem.duration}</p>
+                )}
+                {/* Toon keyPoints als die bestaan (Workshop) */}
+                {selectedItem.keyPoints && (
+                   <ul className="text-sm text-gray-600 space-y-1 mt-2 sm:mt-0 sm:ml-4">
+                      {selectedItem.keyPoints.map((detail, index) => (
+                          <li key={index} className="flex items-center"><CheckCircle className="inline mr-1.5 h-4 w-4 text-blue-700" />{detail}</li>
+                      ))}
+                   </ul>
+                )}
+                 {/* Toon features als die bestaan (Transformatie) */}
+                {selectedItem.features && (
+                   <ul className="text-sm text-gray-600 space-y-1 mt-2 sm:mt-0 sm:ml-4">
+                      {selectedItem.features.map((feature, index) => (
+                          <li key={index} className="flex items-center"><CheckCircle className="inline mr-1.5 h-4 w-4 text-blue-700" />{feature}</li>
+                      ))}
+                   </ul>
+                )}
+             </DialogFooter>
+             <DialogClose asChild className="mt-4 sm:mt-0">
+               <Button type="button" variant="outline">
+                 Sluiten
+               </Button>
+             </DialogClose>
+           </DialogContent>
+         </Dialog>
+       )}
+
     </div>
   );
 }
