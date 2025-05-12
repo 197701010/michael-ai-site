@@ -20,9 +20,6 @@ export default function BedanktPagina() {
           <p className="mt-4 text-lg text-gray-700">
             Uw bericht is succesvol verzonden. Ik neem zo spoedig mogelijk contact met u op om de mogelijkheden te bespreken.
           </p>
-          <p className="mt-2 text-base text-gray-600">
-            U kunt een bevestiging van uw aanvraag in uw e-mail verwachten (indien van toepassing).
-          </p>
         </div>
         <div className="mt-10">
           <Link
