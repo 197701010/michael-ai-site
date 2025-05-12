@@ -18,9 +18,14 @@
         "name": "next"
       }
     ],
+    // --- BEGIN AANGEPASTE SECTIE ---
+    "baseUrl": ".", // Stelt de basis in op de hoofdmap van het project
     "paths": {
-      "@/*": ["./src/*"]
+      "@/lib/*": ["lib/*"],         // NIEUW: @/lib/* verwijst naar de 'lib' map in de hoofdmap
+      "@/components/*": ["src/components/*"], // Behoud of voeg toe als je dit gebruikt
+      "@/*": ["./src/*"]           // Bestaande alias voor alles in de 'src' map
     }
+    // --- EINDE AANGEPASTE SECTIE ---
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
