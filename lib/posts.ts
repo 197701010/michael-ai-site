@@ -11,40 +11,57 @@ export interface PostData {
   date: string;
   excerpt?: string;
   author?: string;
-  contentHtml?: string; // Voor server-side rendering naar HTML (optioneel als je react-markdown gebruikt)
-  contentMarkdown?: string; // De Markdown content zelf
-  [key: string]: any; // To allow other frontmatter properties
+  contentHtml?: string;
+  contentMarkdown?: string;
+  ogImage?: string; // Toegevoegd voor specifieke OG image per post
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any; // ESLint regel hierboven toegevoegd
 }
 
 export function getSortedPostsData(): PostData[] {
-  // Get file names under /content/blog
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" or ".mdx" from file name to get id
-    const id = fileName.replace(/\.(md|mdx)$/, '');
+  let fileNames: string[] = [];
+  try {
+    // Controleer of de map bestaat voordat je probeert te lezen
+    if (!fs.existsSync(postsDirectory)) {
+      console.warn("Blog content directory not found at:", postsDirectory);
+      return [];
+    }
+    fileNames = fs.readdirSync(postsDirectory);
+  } catch (e) {
+    console.warn("Error reading posts directory:", postsDirectory, e);
+    return [];
+  }
 
-    // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const allPostsData = fileNames
+    .filter(fileName => fileName.endsWith('.md') || fileName.endsWith('.mdx'))
+    .map((fileName) => {
+      const id = fileName.replace(/\.(md|mdx)$/, '');
+      const fullPath = path.join(postsDirectory, fileName);
+      let fileContents = '';
+      try {
+        fileContents = fs.readFileSync(fullPath, 'utf8');
+      } catch (e) {
+        console.error(`Could not read file: ${fullPath}`, e);
+        return null; // Sla dit bestand over als het niet gelezen kan worden
+      }
+      
+      const matterResult = matter(fileContents);
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
+      return {
+        id,
+        title: matterResult.data.title || 'Geen titel',
+        date: matterResult.data.date ? new Date(matterResult.data.date).toISOString() : new Date().toISOString(),
+        excerpt: matterResult.data.excerpt || '',
+        author: matterResult.data.author || 'Michael Salmagne',
+        contentMarkdown: matterResult.content,
+        ogImage: matterResult.data.ogImage || undefined, // Zorg dat ogImage wordt meegenomen
+        ...matterResult.data,
+      };
+    })
+    .filter(post => post !== null) as PostData[]; // Verwijder null waarden en type cast
 
-    // Combine the data with the id and content
-    return {
-      id,
-      title: matterResult.data.title || 'Geen titel',
-      date: matterResult.data.date || new Date().toISOString().split('T')[0],
-      excerpt: matterResult.data.excerpt || '',
-      author: matterResult.data.author || 'Michael Salmagne',
-      contentMarkdown: matterResult.content,
-      ...matterResult.data,
-    };
-  });
-
-  // Sort posts by date
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
+    if (new Date(a.date) < new Date(b.date)) {
       return 1;
     } else {
       return -1;
@@ -53,35 +70,36 @@ export function getSortedPostsData(): PostData[] {
 }
 
 export async function getPostData(id: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${id}.md`); // Gaat nu uit van .md, pas aan als je ook .mdx gebruikt
+  const mdxFullPath = path.join(postsDirectory, `${id}.mdx`);
+  const mdFullPath = path.join(postsDirectory, `${id}.md`);
   let fileContents = '';
-  try {
-    fileContents = fs.readFileSync(fullPath, 'utf8');
-  } catch (err) {
-    // Probeer .mdx als .md niet gevonden is
-    const mdxFullPath = path.join(postsDirectory, `${id}.mdx`);
-    try {
-      fileContents = fs.readFileSync(mdxFullPath, 'utf8');
-    } catch (mdxErr) {
-      console.error(`Error reading file for post ${id}:`, mdxErr);
-      // Gooi een fout of retourneer een fallback
-      throw new Error(`Post met id ${id} niet gevonden.`);
-    }
+  let foundPath = '';
+
+  if (fs.existsSync(mdxFullPath)) {
+    fileContents = fs.readFileSync(mdxFullPath, 'utf8');
+    foundPath = mdxFullPath;
+  } else if (fs.existsSync(mdFullPath)) {
+    fileContents = fs.readFileSync(mdFullPath, 'utf8');
+    foundPath = mdFullPath;
+  } else {
+    console.error(`Error: Post file not found for id [${id}]. Checked for .mdx and .md in ${postsDirectory}`);
+    throw new Error(`Post met id ${id} niet gevonden.`);
+  }
+  
+  if (!fileContents && foundPath) {
+    console.warn(`Warning: File ${foundPath} for post id [${id}] is empty.`);
   }
 
-  // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
-
-  // De content is matterResult.content (Markdown)
-  // We voegen dit direct toe aan de geretourneerde data
 
   return {
     id,
     title: matterResult.data.title || 'Geen titel',
-    date: matterResult.data.date || new Date().toISOString().split('T')[0],
+    date: matterResult.data.date ? new Date(matterResult.data.date).toISOString() : new Date().toISOString(),
     excerpt: matterResult.data.excerpt || '',
     author: matterResult.data.author || 'Michael Salmagne',
     contentMarkdown: matterResult.content,
+    ogImage: matterResult.data.ogImage || undefined, // Zorg dat ogImage wordt meegenomen
     ...matterResult.data,
   };
 }
