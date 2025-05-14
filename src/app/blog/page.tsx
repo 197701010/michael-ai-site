@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 
 // Dit is de component voor de /blog pagina
 export default function BlogIndexPage() {
-  const allPostsData = getSortedPostsData(); // Haal ALLE posts op
+  // --- WIJZIGING HIER ---
+  const allPostsData: PostData[] = getSortedPostsData(); // Expliciet type PostData[] toegevoegd
+  // --- EINDE WIJZIGING ---
 
   return (
     <div className="bg-gray-100 py-12 md:py-20 min-h-screen">
@@ -22,7 +24,7 @@ export default function BlogIndexPage() {
 
         {allPostsData && allPostsData.length > 0 ? (
           <div className="space-y-8">
-            {allPostsData.map(({ id, date, title, excerpt }) => ( // Gebruik de juiste velden uit je PostData
+            {allPostsData.map(({ id, date, title, excerpt }) => ( // Velden worden hier gedestructureerd
               <article key={id} className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <h2 className="text-2xl font-bold text-blue-700 mb-2">
                   <Link href={`/blog/${id}`} className="hover:underline">
