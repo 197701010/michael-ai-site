@@ -211,49 +211,13 @@ export default function Home() {
     setSelectedItem(null);
   };
   
-  // De puntkomma's na de functiedefinities hierboven zijn correct.
-  // Er staan geen verdwaalde tekens tussen de laatste functie en de 'return'.
-
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center px-4 sm:px-4 md:px-6">
-          <Link href="/" className="font-bold text-xl text-blue-800">
-            Michael Salmagne
-          </Link>
-          <nav className="ml-auto flex flex-wrap justify-center gap-4 pt-2 text-sm sm:pt-0 sm:w-auto sm:flex-row sm:gap-6">
-            <Link href="#about" className="font-medium hover:underline underline-offset-4 text-blue-800">
-              Over mij
-            </Link>
-            <Link href="#topics" className="font-medium hover:underline underline-offset-4 text-blue-800">
-              Lezingen
-            </Link>
-            <Link href="#workshops" className="font-medium hover:underline underline-offset-4 text-blue-800">
-              Workshops
-            </Link>
-            <Link href="#trajecten" className="font-medium hover:underline underline-offset-4 text-blue-800">
-              Transformatie
-            </Link>
-            <Link
-                href="/blog" // Link naar de blogpagina
-                className="font-medium hover:underline underline-offset-4 text-blue-800" // Consistente styling
-            >
-                Blog
-            </Link>
-            <Link
-                href="#booking"
-                className="bg-blue-800 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-blue-900 transition sm:ml-4"
-            >
-                Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
 
       <main className="flex-1">
         {/* Hero Section */}
         <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container px-4 md:px-6">
+          <div className="container px-6 md:px-6">
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
               <div className="space-y-6">
                 <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
@@ -513,9 +477,11 @@ export default function Home() {
             © {new Date().getFullYear()} Michael Salmagne. Alle rechten voorbehouden.
           </p>
           <nav className="flex gap-4 sm:gap-6 ml-auto">
+            {/* --- BLOG LINK VERWIJDERD/UITGECOMMENTARIEERD ---
              <Link href="/blog" className="text-sm font-medium text-blue-800 hover:underline underline-offset-4">
               Blog
             </Link>
+            */}
             <Link href="/privacy" className="text-sm font-medium text-blue-800 hover:underline underline-offset-4">
               Privacy
             </Link>
@@ -552,18 +518,18 @@ export default function Home() {
                 <p className="text-sm text-gray-600 flex items-center"><Clock className="inline mr-1.5 h-4 w-4" />Duur: {selectedItem.duration}</p>
               )}
               {selectedItem.keyPoints && (
-                 <ul className="text-sm text-gray-600 space-y-1 sm:ml-4">
+                  <ul className="text-sm text-gray-600 space-y-1 sm:ml-4">
                     {selectedItem.keyPoints.map((detail, index) => (
                         <li key={index} className="flex items-center"><CheckCircle className="inline mr-1.5 h-4 w-4 text-blue-700" />{detail}</li>
                     ))}
-                 </ul>
+                  </ul>
               )}
               {selectedItem.features && (
-                 <ul className="text-sm text-gray-600 space-y-1 sm:ml-4">
+                  <ul className="text-sm text-gray-600 space-y-1 sm:ml-4">
                     {selectedItem.features.map((feature, index) => (
                         <li key={index} className="flex items-center"><CheckCircle className="inline mr-1.5 h-4 w-4 text-blue-700" />{feature}</li>
                     ))}
-                 </ul>
+                  </ul>
               )}
             </DialogFooter>
             <DialogClose asChild className="mt-6">
