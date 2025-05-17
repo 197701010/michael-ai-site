@@ -34,171 +34,25 @@ interface DataItem {
 
 // --- DATA ARRAYS ---
 const lezingenData: DataItem[] = [
-  {
-    id: "lezing-1",
-    title: "AI voor Besluitvormers",
-    description: "Ontdek hoe u als leider AI kunt inzetten voor scherpere inzichten en betere strategische beslissingen, zonder technisch expert te hoeven zijn. Leer de principes van AI-gedreven besluitvorming en identificeer concrete kansen.",
-    duration: "60-90 minuten (aanpasbaar)",
-    imageSrc: "/images/lezingen/lezing-1.jpg",
-    altText: "Conceptuele afbeelding over data-analyse en AI voor zakelijke beslissingen",
-    modalDetails: [
-      "**Doelgroep:** Bestuurders, managers, en directieleden die de potentie van AI voor hun organisatie willen ontsluiten.",
-      "**Kernboodschap:** Leer de principes van AI-gedreven besluitvorming, identificeer concrete AI-kansen, en krijg handvatten om AI-projecten te sturen en te evalueren.",
-      "**Resultaat:** U verlaat de lezing met direct toepasbare inzichten en een helder beeld van hoe AI uw besluitvormingsprocessen kan versterken, met behoud van menselijk overzicht en ethische verantwoordelijkheid.",
-      "**Mijn Unieke Aanpak:** Ik combineer strategisch inzicht met een gave om complexe technologie toegankelijk te maken, specifiek gericht op de vragen en uitdagingen van leiders."
-    ]
-  },
-  {
-    id: "lezing-2",
-    title: "De Menselijke Kant van AI",
-    description: "Verken de ethische en sociale impact van AI. Ontdek strategieën voor transparantie, eerlijkheid en menselijke controle in AI-systemen voor een verantwoorde implementatie.",
-    duration: "90 minuten",
-    imageSrc: "/images/lezingen/lezing-2.jpg",
-    altText: "Symbolische weergave van menselijke en kunstmatige intelligentie die samenwerken",
-    modalDetails: [
-        "**Focus:** De ethische, sociale en culturele impact van AI op individu, organisatie en maatschappij.",
-        "**Inhoud:** Strategieën voor het waarborgen van transparantie, eerlijkheid, privacy en menselijke controle in AI-systemen.",
-        "**Resultaat:** Concrete handvatten en een ethisch kompas om AI op een verantwoorde, mensgerichte manier te implementeren en te gebruiken.",
-        "**Mijn Unieke Aanpak:** Een gebalanceerd perspectief dat zowel de technologische mogelijkheden als de cruciale menselijke en maatschappelijke waarden belicht."
-    ]
-  },
-  {
-    id: "lezing-3",
-    title: "AI Trends en Toekomstvisie",
-    description: "Een helder overzicht van cutting-edge AI-trends zoals Generative AI en XAI, en een inspirerende blik op hoe u strategisch kunt anticiperen op de volgende innovatiegolf.",
-    duration: "75 minuten",
-    imageSrc: "/images/lezingen/lezing-3.jpg",
-    altText: "Futuristische visualisatie van AI-trends en technologische vooruitgang",
-    modalDetails: ["**Inhoud:** Verkenning van cutting-edge AI-trends zoals Generative AI, Explainable AI (XAI), en de impact op diverse sectoren.\n**Perspectief:** Realistische toekomstscenario's, kansen en uitdagingen, en hoe proactief te anticiperen op de volgende golf van AI-innovatie.\n**Resultaat:** Een geïnformeerde en geïnspireerde kijk op de toekomst, stelt u in staat strategisch vooruit te denken en uw organisatie voor te bereiden."]
-  },
-  {
-    id: "lezing-4",
-    title: "AI in de Dagelijkse Praktijk",
-    description: "Ontdek met tastbare use-cases en succesverhalen hoe AI processen optimaliseert en nieuwe mogelijkheden creëert. Krijg inspiratie voor uw eigen werkveld.",
-    duration: "75 minuten",
-    imageSrc: "/images/lezingen/lezing-4.jpg",
-    altText: "Moderne iconen van diverse sectoren verbonden door een AI-netwerk",
-    modalDetails: ["**Focus:** Tastbare use-cases en succesverhalen van AI-implementaties in o.a. marketing, klantenservice, operations en HR.\n**Inzichten:** Leer van best practices, valkuilen en de praktische stappen om AI succesvol in uw eigen werkveld toe te passen.\n**Resultaat:** Een schat aan direct toepasbare ideeën en inspiratie om AI-projecten in uw eigen organisatie te starten of te verbeteren."]
-  },
-  {
-    id: "lezing-5",
-    title: "Ethiek en AI",
-    description: "Een essentiële discussie over ethische dilemma's en verantwoordelijkheden in AI, met handvatten voor het ontwikkelen van ethische richtlijnen.",
-    duration: "90 minuten",
-    imageSrc: "/images/lezingen/lezing-5.jpg",
-    altText: "Abstracte weegschaal die de balans tussen AI en ethiek symboliseert",
-    modalDetails: ["**Kernvragen:** Hoe zorgen we voor eerlijke, transparante en non-discriminatoire AI? Wie is verantwoordelijk? Hoe borgen we privacy en autonomie?\n**Aanpak:** Analyse van ethische frameworks, casestudies en interactieve discussie om bewustzijn en kritisch denken te bevorderen.\n**Resultaat:** Een dieper begrip van de ethische dimensies van AI en handvatten om ethische richtlijnen binnen uw organisatie te ontwikkelen en te implementeren."]
-  },
-  {
-    id: "lezing-6",
-    title: "AI voor Niet-Techneuten",
-    description: "Een heldere introductie tot AI zonder technisch jargon. Krijg een solide basiskennis om met vertrouwen mee te praten over AI-ontwikkelingen.",
-    duration: "60 minuten",
-    imageSrc: "/images/lezingen/lezing-6.jpg",
-    altText: "Heldere, verlichte weg die complexe AI-concepten toegankelijk maakt",
-    modalDetails: ["**Doel:** Demystificeren van AI-jargon en complexe concepten uitleggen in begrijpelijke taal.\n**Inhoud:** Wat is AI (niet)? Wat zijn de belangrijkste toepassingen? Hoe beïnvloedt AI uw werk en leven?\n**Resultaat:** Een solide basiskennis van AI, waardoor u met meer vertrouwen kunt meepraten over en anticiperen op AI-ontwikkelingen."]
-  }
+  { id: "lezing-1", title: "AI voor Besluitvormers", description: "Ontdek hoe u als leider AI kunt inzetten voor scherpere inzichten en betere strategische beslissingen, zonder technisch expert te hoeven zijn. Leer de principes van AI-gedreven besluitvorming en identificeer concrete kansen.", duration: "60-90 minuten (aanpasbaar)", imageSrc: "/images/lezingen/lezing-1.jpg", altText: "Conceptuele afbeelding over data-analyse en AI voor zakelijke beslissingen", modalDetails: [ "**Doelgroep:** Bestuurders, managers, en directieleden die de potentie van AI voor hun organisatie willen ontsluiten.", "**Kernboodschap:** Leer de principes van AI-gedreven besluitvorming, identificeer concrete AI-kansen, en krijg handvatten om AI-projecten te sturen en te evalueren.", "**Resultaat:** U verlaat de lezing met direct toepasbare inzichten en een helder beeld van hoe AI uw besluitvormingsprocessen kan versterken, met behoud van menselijk overzicht en ethische verantwoordelijkheid.", "**Mijn Unieke Aanpak:** Ik combineer strategisch inzicht met een gave om complexe technologie toegankelijk te maken, specifiek gericht op de vragen en uitdagingen van leiders." ] },
+  { id: "lezing-2", title: "De Menselijke Kant van AI", description: "Verken de ethische en sociale impact van AI. Ontdek strategieën voor transparantie, eerlijkheid en menselijke controle in AI-systemen voor een verantwoorde implementatie.", duration: "90 minuten", imageSrc: "/images/lezingen/lezing-2.jpg", altText: "Symbolische weergave van menselijke en kunstmatige intelligentie die samenwerken", modalDetails: [ "**Focus:** De ethische, sociale en culturele impact van AI op individu, organisatie en maatschappij.", "**Inhoud:** Strategieën voor het waarborgen van transparantie, eerlijkheid, privacy en menselijke controle in AI-systemen.", "**Resultaat:** Concrete handvatten en een ethisch kompas om AI op een verantwoorde, mensgerichte manier te implementeren en te gebruiken.", "**Mijn Unieke Aanpak:** Een gebalanceerd perspectief dat zowel de technologische mogelijkheden als de cruciale menselijke en maatschappelijke waarden belicht." ] },
+  { id: "lezing-3", title: "AI Trends en Toekomstvisie", description: "Een helder overzicht van cutting-edge AI-trends zoals Generative AI en XAI, en een inspirerende blik op hoe u strategisch kunt anticiperen op de volgende innovatiegolf.", duration: "75 minuten", imageSrc: "/images/lezingen/lezing-3.jpg", altText: "Futuristische visualisatie van AI-trends en technologische vooruitgang", modalDetails: ["**Inhoud:** Verkenning van cutting-edge AI-trends zoals Generative AI, Explainable AI (XAI), en de impact op diverse sectoren.\n**Perspectief:** Realistische toekomstscenario's, kansen en uitdagingen, en hoe proactief te anticiperen op de volgende golf van AI-innovatie.\n**Resultaat:** Een geïnformeerde en geïnspireerde kijk op de toekomst, stelt u in staat strategisch vooruit te denken en uw organisatie voor te bereiden."] },
+  { id: "lezing-4", title: "AI in de Dagelijkse Praktijk", description: "Ontdek met tastbare use-cases en succesverhalen hoe AI processen optimaliseert en nieuwe mogelijkheden creëert. Krijg inspiratie voor uw eigen werkveld.", duration: "75 minuten", imageSrc: "/images/lezingen/lezing-4.jpg", altText: "Moderne iconen van diverse sectoren verbonden door een AI-netwerk", modalDetails: ["**Focus:** Tastbare use-cases en succesverhalen van AI-implementaties in o.a. marketing, klantenservice, operations en HR.\n**Inzichten:** Leer van best practices, valkuilen en de praktische stappen om AI succesvol in uw eigen werkveld toe te passen.\n**Resultaat:** Een schat aan direct toepasbare ideeën en inspiratie om AI-projecten in uw eigen organisatie te starten of te verbeteren."] },
+  { id: "lezing-5", title: "Ethiek en AI", description: "Een essentiële discussie over ethische dilemma's en verantwoordelijkheden in AI, met handvatten voor het ontwikkelen van ethische richtlijnen.", duration: "90 minuten", imageSrc: "/images/lezingen/lezing-5.jpg", altText: "Abstracte weegschaal die de balans tussen AI en ethiek symboliseert", modalDetails: ["**Kernvragen:** Hoe zorgen we voor eerlijke, transparante en non-discriminatoire AI? Wie is verantwoordelijk? Hoe borgen we privacy en autonomie?\n**Aanpak:** Analyse van ethische frameworks, casestudies en interactieve discussie om bewustzijn en kritisch denken te bevorderen.\n**Resultaat:** Een dieper begrip van de ethische dimensies van AI en handvatten om ethische richtlijnen binnen uw organisatie te ontwikkelen en te implementeren."] },
+  { id: "lezing-6", title: "AI voor Niet-Techneuten", description: "Een heldere introductie tot AI zonder technisch jargon. Krijg een solide basiskennis om met vertrouwen mee te praten over AI-ontwikkelingen.", duration: "60 minuten", imageSrc: "/images/lezingen/lezing-6.jpg", altText: "Heldere, verlichte weg die complexe AI-concepten toegankelijk maakt", modalDetails: ["**Doel:** Demystificeren van AI-jargon en complexe concepten uitleggen in begrijpelijke taal.\n**Inhoud:** Wat is AI (niet)? Wat zijn de belangrijkste toepassingen? Hoe beïnvloedt AI uw werk en leven?\n**Resultaat:** Een solide basiskennis van AI, waardoor u met meer vertrouwen kunt meepraten over en anticiperen op AI-ontwikkelingen."] }
 ];
 
 const workshopsData: DataItem[] = [
-  {
-    id: "workshop-1",
-    title: "AI Innovatie Workshop",
-    description: "Een hands-on workshop waarin teams via design thinking en co-creatie concrete AI-kansen identificeren en eerste concepten ontwikkelen.",
-    keyPoints: [
-      "Duur: Halve dag (4 uur)",
-      "Voor teams van 5–20 personen",
-      "Inclusief werkmateriaal"
-    ],
-    imageSrc: "/images/workshops/workshop-1.jpg",
-    altText: "Team dat samenwerkt aan innovatieve AI-ideeën tijdens een workshop",
-    modalDetails: [
-        "**Focus:** Identificeren van concrete AI-kansen en ontwikkelen van innovatieve oplossingen specifiek voor uw organisatie.",
-        "**Methode:** Een energieke mix van hands-on oefeningen, design thinking methodologieën, en co-creatieve brainstormsessies om direct tot de kern te komen.",
-        "**Resultaat:** Een concrete lijst met direct toepasbare, potentiële AI-projecten, vaak inclusief eerste prototypes of uitgewerkte concepten. Uw team verlaat de workshop met nieuwe energie en een innovatieve mindset."
-    ]
-  },
-  {
-    id: "workshop-2",
-    title: "Toekomstgericht Denken",
-    description: "Ontwikkel een langetermijnstrategie voor AI-integratie, anticipeer op trends en bereid uw team voor op de impact van AI op uw sector.",
-    keyPoints: [
-      "Duur: Volledige dag (7 uur)",
-      "Voor teams van 5–15 personen",
-      "Inclusief lunch & werkmateriaal"
-    ],
-    imageSrc: "/images/workshops/workshop-2.jpg",
-    altText: "Modern kompas dat de richting wijst naar strategisch toekomstdenken met AI",
-    modalDetails: ["**Doel:** Uw team helpen voorbij de waan van de dag te kijken en een robuuste, adaptieve langetermijnstrategie voor AI-integratie te ontwikkelen.\n**Aanpak:** Interactieve sessies gericht op scenarioplanning, impactanalyse van toekomstige AI-trends op uw specifieke sector, en het formuleren van een flexibele strategische roadmap.\n**Resultaat:** Een toekomstbestendige AI-visie, concrete strategische pijlers voor de komende 1-3 jaar, en een team dat beter is uitgerust om proactief in te spelen op technologische veranderingen."]
-  },
-  {
-    id: "workshop-3",
-    title: "AI for Executives",
-    description: "Een exclusieve sessie voor leiders om AI strategisch te verankeren in bedrijfsdoelstellingen, investeringen te beoordelen en AI-gedreven verandering te leiden.",
-    keyPoints: [
-      "Duur: 3 uur",
-      "Voor executives en beslissers",
-      "Inclusief strategisch canvas"
-    ],
-    imageSrc: "/images/workshops/workshop-3.jpg",
-    altText: "Professionele setting die strategische AI-besluitvorming voor leidinggevenden symboliseert",
-    modalDetails: ["**Gericht op:** CEO's, directieleden, en senior managers die AI niet als een losse tool zien, maar als een integraal onderdeel van de bedrijfsstrategie.\n**Inhoud:** Identificeren van high-impact AI use cases die direct bijdragen aan bedrijfsdoelen, het opstellen van business cases, het beoordelen van AI-investeringen, het managen van implementatierisico's, en het effectief leiden van AI-gedreven verandering binnen de organisatie.\n**Resultaat:** Een scherper begrip van de strategische implicaties van AI, een praktisch framework voor AI-governance en besluitvorming, en de concrete vaardigheden om AI-initiatieven succesvol te overzien en te sturen."]
-  },
-  {
-    id: "workshop-4",
-    title: "Storytelling with AI",
-    description: "Leer hoe AI kan helpen bij contentideeën, personalisatie en analyse voor krachtigere communicatie en een dieper begrip van uw doelgroep.",
-    keyPoints: [
-      "Duur: 4 uur",
-      "Voor marketing en communicatieprofessionals",
-      "Hands-on met AI schrijftools"
-    ],
-    imageSrc: "/images/workshops/workshop-4.jpg",
-    altText: "Visualisatie van hoe AI helpt bij het creëren van krachtige, digitale verhalen",
-    modalDetails: ["**Inhoud:** Ontdek hoe AI-tools kunnen assisteren bij het genereren van creatieve content ideeën, het schrijven en optimaliseren van teksten, het personaliseren van boodschappen voor verschillende segmenten, en het analyseren van de effectiviteit van uw communicatie-uitingen.\n**Tools & Technieken:** Kennismaking en hands-on oefeningen met relevante en toegankelijke AI-gedreven contentcreatie-, analyse- en personalisatietools.\n**Resultaat:** Verbeterde vaardigheden om AI effectief in te zetten voor overtuigende storytelling, het ontwikkelen van datagedreven contentstrategieën, en het verkrijgen van een dieper, genuanceerd begrip van uw doelgroep."]
-  }
+  { id: "workshop-1", title: "AI Innovatie Workshop", description: "Een hands-on workshop waarin teams via design thinking en co-creatie concrete AI-kansen identificeren en eerste concepten ontwikkelen.", keyPoints: [ "Duur: Halve dag (4 uur)", "Voor teams van 5–20 personen", "Inclusief werkmateriaal" ], imageSrc: "/images/workshops/workshop-1.jpg", altText: "Team dat samenwerkt aan innovatieve AI-ideeën tijdens een workshop", modalDetails: [ "**Focus:** Identificeren van concrete AI-kansen en ontwikkelen van innovatieve oplossingen specifiek voor uw organisatie.", "**Methode:** Een energieke mix van hands-on oefeningen, design thinking methodologieën, en co-creatieve brainstormsessies om direct tot de kern te komen.", "**Resultaat:** Een concrete lijst met direct toepasbare, potentiële AI-projecten, vaak inclusief eerste prototypes of uitgewerkte concepten. Uw team verlaat de workshop met nieuwe energie en een innovatieve mindset." ] },
+  { id: "workshop-2", title: "Toekomstgericht Denken", description: "Ontwikkel een langetermijnstrategie voor AI-integratie, anticipeer op trends en bereid uw team voor op de impact van AI op uw sector.", keyPoints: [ "Duur: Volledige dag (7 uur)", "Voor teams van 5–15 personen", "Inclusief lunch & werkmateriaal" ], imageSrc: "/images/workshops/workshop-2.jpg", altText: "Modern kompas dat de richting wijst naar strategisch toekomstdenken met AI", modalDetails: ["**Doel:** Uw team helpen voorbij de waan van de dag te kijken en een robuuste, adaptieve langetermijnstrategie voor AI-integratie te ontwikkelen.\n**Aanpak:** Interactieve sessies gericht op scenarioplanning, impactanalyse van toekomstige AI-trends op uw specifieke sector, en het formuleren van een flexibele strategische roadmap.\n**Resultaat:** Een toekomstbestendige AI-visie, concrete strategische pijlers voor de komende 1-3 jaar, en een team dat beter is uitgerust om proactief in te spelen op technologische veranderingen."] },
+  { id: "workshop-3", title: "AI for Executives", description: "Een exclusieve sessie voor leiders om AI strategisch te verankeren in bedrijfsdoelstellingen, investeringen te beoordelen en AI-gedreven verandering te leiden.", keyPoints: [ "Duur: 3 uur", "Voor executives en beslissers", "Inclusief strategisch canvas" ], imageSrc: "/images/workshops/workshop-3.jpg", altText: "Professionele setting die strategische AI-besluitvorming voor leidinggevenden symboliseert", modalDetails: ["**Gericht op:** CEO's, directieleden, en senior managers die AI niet als een losse tool zien, maar als een integraal onderdeel van de bedrijfsstrategie.\n**Inhoud:** Identificeren van high-impact AI use cases die direct bijdragen aan bedrijfsdoelen, het opstellen van business cases, het beoordelen van AI-investeringen, het managen van implementatierisico's, en het effectief leiden van AI-gedreven verandering binnen de organisatie.\n**Resultaat:** Een scherper begrip van de strategische implicaties van AI, een praktisch framework voor AI-governance en besluitvorming, en de concrete vaardigheden om AI-initiatieven succesvol te overzien en te sturen."] },
+  { id: "workshop-4", title: "Storytelling with AI", description: "Leer hoe AI kan helpen bij contentideeën, personalisatie en analyse voor krachtigere communicatie en een dieper begrip van uw doelgroep.", keyPoints: [ "Duur: 4 uur", "Voor marketing en communicatieprofessionals", "Hands-on met AI schrijftools" ], imageSrc: "/images/workshops/workshop-4.jpg", altText: "Visualisatie van hoe AI helpt bij het creëren van krachtige, digitale verhalen", modalDetails: ["**Inhoud:** Ontdek hoe AI-tools kunnen assisteren bij het genereren van creatieve content ideeën, het schrijven en optimaliseren van teksten, het personaliseren van boodschappen voor verschillende segmenten, en het analyseren van de effectiviteit van uw communicatie-uitingen.\n**Tools & Technieken:** Kennismaking en hands-on oefeningen met relevante en toegankelijke AI-gedreven contentcreatie-, analyse- en personalisatietools.\n**Resultaat:** Verbeterde vaardigheden om AI effectief in te zetten voor overtuigende storytelling, het ontwikkelen van datagedreven contentstrategieën, en het verkrijgen van een dieper, genuanceerd begrip van uw doelgroep."] }
 ];
 
 const transformatieData: DataItem[] = [
-  {
-    id: "transformatie-1",
-    title: "AI Ready Traject",
-    description: "Een gefaseerd traject van analyse (AI Readiness Scan) tot strategie en pilot-implementatie, resulterend in een gedragen AI-strategie en succesvolle eerste AI-toepassingen.",
-    features: [
-      "Van strategie tot implementatie",
-      "Inclusief workshops, scans en roadmap",
-      "Op maat voor jouw organisatie"
-    ],
-    imageSrc: "/images/transformatie/transformatie-1.jpg",
-    altText: "Symbolische weergave van een organisatie die transformeert naar AI-gereedheid",
-    modalDetails: [
-        "**Probleem Opgelost:** Helpt organisaties die AI willen implementeren maar niet weten waar te beginnen of hoe een effectieve strategie te ontwikkelen die aansluit bij hun unieke context.",
-        "**Mijn Aanpak:** Een gestructureerd en interactief traject, beginnend met een grondige analyse van uw huidige situatie en AI-potentieel (AI Readiness Scan). Gevolgd door co-creatie van een heldere visie en een pragmatische roadmap, begeleiding bij het selecteren en uitvoeren van impactvolle pilot-projecten, en verankering van kennis binnen uw team.",
-        "**Concrete Resultaten:** Een breed gedragen en direct uitvoerbare AI-strategie, een portfolio van geïdentificeerde quick wins en lange termijn strategische kansen, succesvol gelanceerde eerste AI-toepassingen met meetbare impact, en een team dat is voorbereid en gemotiveerd voor verdere AI-integratie.",
-        "**Doorlooptijd:** De duur is flexibel en afhankelijk van de scope en complexiteit, typisch 2-4 maanden voor de strategische definitie en het opstarten van de eerste pilots."
-    ]
-  },
-  {
-    id: "transformatie-2",
-    title: "Interim AI Leadership",
-    description: "Direct beschikbare, ervaren AI-leiderschap om uw AI-transformatie te sturen. Ik integreer in uw team, leid projecten en coach intern talent voor duurzame AI-verankering.",
-    features: [
-      "Directe AI-leiderschap en executiekracht",
-      "Strategieontwikkeling en implementatiebegeleiding",
-      "Opbouw van interne AI-competenties"
-    ],
-    imageSrc: "/images/transformatie/transformatie-2.jpg",
-    altText: "Conceptuele afbeelding van daadkrachtig AI-leiderschap tijdens digitale transities",
-    modalDetails: [
-      "**Probleem Opgelost:** Overbrugt het cruciale gat van direct beschikbare, senior AI-expertise en leiderschapscapaciteit die nodig is om complexe en strategische AI-transformaties succesvol te navigeren en te borgen binnen uw organisatie.",
-      "**Mijn Aanpak:** Een naadloze, tijdelijke integratie in uw management- of projectteam. Ik neem de strategische en operationele leiding op me, manage AI-projecten hands-on, en zorg voor intensieve coaching en kennisoverdracht aan uw interne talent om toekomstige zelfredzaamheid te garanderen.",
-      "**Concrete Resultaten:** Een versneld geïmplementeerde AI-strategie, succesvol gelanceerde en gemanagede pilotprojecten met duidelijke ROI, significant verhoogde interne AI-capaciteit en -kennis, en een organisatiecultuur die AI omarmt en klaar is voor continue innovatie.",
-      "**Doorlooptijd:** Zichtbare impact en een stevig fundament voor verdere groei worden typisch gerealiseerd binnen een periode van 3-6 maanden, afhankelijk van de specifieke opdracht en doelstellingen.",
-      "**Mijn Unieke Waarde:** Ik combineer diepgaande technologische kennis met een scherp oog voor de menselijke en organisatorische dynamiek, waardoor AI niet slechts een project wordt, maar een integraal en breed geaccepteerd onderdeel van uw strategisch succes."
-    ]
-  }
+  { id: "transformatie-1", title: "AI Ready Traject", description: "Een gefaseerd traject van analyse (AI Readiness Scan) tot strategie en pilot-implementatie, resulterend in een gedragen AI-strategie en succesvolle eerste AI-toepassingen.", features: [ "Van strategie tot implementatie", "Inclusief workshops, scans en roadmap", "Op maat voor jouw organisatie" ], imageSrc: "/images/transformatie/transformatie-1.jpg", altText: "Symbolische weergave van een organisatie die transformeert naar AI-gereedheid", modalDetails: [ "**Probleem Opgelost:** Helpt organisaties die AI willen implementeren maar niet weten waar te beginnen of hoe een effectieve strategie te ontwikkelen die aansluit bij hun unieke context.", "**Mijn Aanpak:** Een gestructureerd en interactief traject, beginnend met een grondige analyse van uw huidige situatie en AI-potentieel (AI Readiness Scan). Gevolgd door co-creatie van een heldere visie en een pragmatische roadmap, begeleiding bij het selecteren en uitvoeren van impactvolle pilot-projecten, en verankering van kennis binnen uw team.", "**Concrete Resultaten:** Een breed gedragen en direct uitvoerbare AI-strategie, een portfolio van geïdentificeerde quick wins en lange termijn strategische kansen, succesvol gelanceerde eerste AI-toepassingen met meetbare impact, en een team dat is voorbereid en gemotiveerd voor verdere AI-integratie.", "**Doorlooptijd:** De duur is flexibel en afhankelijk van de scope en complexiteit, typisch 2-4 maanden voor de strategische definitie en het opstarten van de eerste pilots." ] },
+  { id: "transformatie-2", title: "Interim AI Leadership", description: "Direct beschikbare, ervaren AI-leiderschap om uw AI-transformatie te sturen. Ik integreer in uw team, leid projecten en coach intern talent voor duurzame AI-verankering.", features: [ "Directe AI-leiderschap en executiekracht", "Strategieontwikkeling en implementatiebegeleiding", "Opbouw van interne AI-competenties" ], imageSrc: "/images/transformatie/transformatie-2.jpg", altText: "Conceptuele afbeelding van daadkrachtig AI-leiderschap tijdens digitale transities", modalDetails: [ "**Probleem Opgelost:** Overbrugt het cruciale gat van direct beschikbare, senior AI-expertise en leiderschapscapaciteit die nodig is om complexe en strategische AI-transformaties succesvol te navigeren en te borgen binnen uw organisatie.", "**Mijn Aanpak:** Een naadloze, tijdelijke integratie in uw management- of projectteam. Ik neem de strategische en operationele leiding op me, manage AI-projecten hands-on, en zorg voor intensieve coaching en kennisoverdracht aan uw interne talent om toekomstige zelfredzaamheid te garanderen.", "**Concrete Resultaten:** Een versneld geïmplementeerde AI-strategie, succesvol gelanceerde en gemanagede pilotprojecten met duidelijke ROI, significant verhoogde interne AI-capaciteit en -kennis, en een organisatiecultuur die AI omarmt en klaar is voor continue innovatie.", "**Doorlooptijd:** Zichtbare impact en een stevig fundament voor verdere groei worden typisch gerealiseerd binnen een periode van 3-6 maanden, afhankelijk van de specifieke opdracht en doelstellingen.", "**Mijn Unieke Waarde:** Ik combineer diepgaande technologische kennis met een scherp oog voor de menselijke en organisatorische dynamiek, waardoor AI niet slechts een project wordt, maar een integraal en breed geaccepteerd onderdeel van uw strategisch succes." ] }
 ];
-
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<DataItem | null>(null);
@@ -212,13 +66,13 @@ export default function Home() {
   };
   
   return (
-    <div className="flex flex-col min-h-screen">
-
+    <> {/* React Fragment */}
       <main className="flex-1">
         {/* Hero Section */}
         <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container px-6 md:px-6">
+          <div className="flex flex-col items-center w-full px-6 sm:px-8 md:px-10 lg:px-12">
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+              {/* ... inhoud hero ... */}
               <div className="space-y-6">
                 <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
                   AI-expert met een menselijke kijk op de toekomst
@@ -242,10 +96,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About Section - Met bijgewerkte tekst */}
+        {/* About Section */}
         <section id="about" className="py-16 md:py-24">
-          <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center w-full px-6 sm:px-8 md:px-10 lg:px-12">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center max-w-4xl mx-auto">
+              {/* ... inhoud about ... */}
               <div className="relative mx-auto w-full aspect-square max-w-sm overflow-hidden rounded-full lg:ml-0">
                 <Image
                   alt="Portretfoto van Michael Salmagne, AI expert en spreker"
@@ -287,8 +142,9 @@ export default function Home() {
 
         {/* Topics Section (Lezingen) */}
         <section id="topics" className="py-16 md:py-24 bg-slate-50">
-          <div className="container px-4 md:px-6">
+           <div className="flex flex-col items-center w-full px-6 sm:px-8 md:px-10 lg:px-12">
             <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-2xl mx-auto mb-12">
+              {/* ... titel en paragraaf lezingen ... */}
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-blue-800">Mijn Lezingen</h2>
                 <p className="mx-auto text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -327,7 +183,7 @@ export default function Home() {
                       </div>
                     </div>
                   </DialogTrigger>
-                  {/* DialogContent wordt hieronder geplaatst, buiten de map, om de state te gebruiken */}
+                  {/* DialogContent blijft hetzelfde */}
                 </Dialog>
               ))}
             </div>
@@ -336,8 +192,9 @@ export default function Home() {
 
         {/* Workshops Section */}
         <section id="workshops" className="py-16 md:py-24">
-          <div className="container px-4 md:px-6">
+           <div className="flex flex-col items-center w-full px-6 sm:px-8 md:px-10 lg:px-12">
             <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
+              {/* ... titel en paragraaf workshops ... */}
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
                 Inspiratie Workshops
               </h2>
@@ -379,7 +236,7 @@ export default function Home() {
                       </div>
                     </div>
                   </DialogTrigger>
-                  {/* DialogContent wordt hieronder geplaatst */}
+                  {/* DialogContent blijft hetzelfde */}
                 </Dialog>
               ))}
             </div>
@@ -388,8 +245,9 @@ export default function Home() {
 
         {/* Transformatie Trajecten Section */}
         <section id="trajecten" className="py-16 md:py-24 bg-slate-50">
-          <div className="container px-4 sm:px-4 md:px-6">
-            <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
+          <div className="flex flex-col items-center w-full px-6 sm:px-8 md:px-10 lg:px-12">
+             <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
+              {/* ... titel en paragraaf transformatie ... */}
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-800">
                 Transformatie Trajecten
               </h2>
@@ -432,7 +290,7 @@ export default function Home() {
                       </div>
                     </div>
                   </DialogTrigger>
-                  {/* DialogContent wordt hieronder geplaatst */}
+                  {/* DialogContent blijft hetzelfde */}
                 </Dialog>
               ))}
             </div>
@@ -441,8 +299,9 @@ export default function Home() {
 
         {/* Booking Section */}
         <section id="booking" className="py-16 md:py-24 bg-slate-50">
-          <div className="container px-4 md:px-6">
+           <div className="flex flex-col items-center w-full px-6 sm:px-8 md:px-10 lg:px-12">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 max-w-3xl mx-auto">
+              {/* ... inhoud booking ... */}
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold tracking-tight">Boek Michael als Spreker</h2>
                 <p className="text-gray-500 md:text-lg">
@@ -472,16 +331,14 @@ export default function Home() {
       </main>
 
       <footer className="border-t py-6 md:py-8 bg-blue-50">
+        {/* De container in de footer is ongewijzigd gelaten,
+            maar kan ook aangepast worden naar w-full px-... indien gewenst.
+        */}
         <div className="container flex flex-col gap-4 md:flex-row md:items-center md:gap-8 px-4 md:px-6">
           <p className="text-sm text-gray-600">
             © {new Date().getFullYear()} Michael Salmagne. Alle rechten voorbehouden.
           </p>
           <nav className="flex gap-4 sm:gap-6 ml-auto">
-            {/* --- BLOG LINK VERWIJDERD/UITGECOMMENTARIEERD ---
-             <Link href="/blog" className="text-sm font-medium text-blue-800 hover:underline underline-offset-4">
-              Blog
-            </Link>
-            */}
             <Link href="/privacy" className="text-sm font-medium text-blue-800 hover:underline underline-offset-4">
               Privacy
             </Link>
@@ -540,6 +397,6 @@ export default function Home() {
           </DialogContent>
         </Dialog>
       )}
-    </div>
+    </>
   );
 }
